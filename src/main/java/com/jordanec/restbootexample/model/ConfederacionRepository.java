@@ -10,7 +10,8 @@ import java.util.Optional;
 
 //@RepositoryRestResource(path="")
 public interface ConfederacionRepository extends CrudRepository<Confederacion, Integer>, ConfederacionRepositoryCustom{
-	Optional<Confederacion> findByNombre(String nombre);
+	public Confederacion findByNombre(String nombre);
+	
 
 	
 }

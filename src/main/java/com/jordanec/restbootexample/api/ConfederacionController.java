@@ -20,7 +20,7 @@ import com.jordanec.restbootexample.model.Status;
 import com.google.common.collect.*;
 
 @RestController
-@RequestMapping("/v1/confederacion")
+@RequestMapping("/v1/confederaciones")
 public class ConfederacionController {
 
 	@Autowired
@@ -44,6 +44,12 @@ public class ConfederacionController {
 		return confederacionRepository.findOne(id);
 	}
 	
+	@RequestMapping(value="/nombre={nombre}", method=RequestMethod.GET)
+	Confederacion findByNombre(@PathVariable("nombre") String nombre) {
+		
+		return confederacionRepository.findByNombre(nombre);
+	}
+	
 	@RequestMapping(value="/{id}/update", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
 	Status updateConfederacion(@RequestBody Confederacion confederacion, @PathVariable int id) {
@@ -65,6 +71,7 @@ public class ConfederacionController {
 		}
 	}
 	
+	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	Collection<Confederacion> listConfederaciones() {
 		Iterator<Confederacion> iterator = confederacionRepository.findAll().iterator();
@@ -75,14 +82,6 @@ public class ConfederacionController {
 		//return ((List<Confederacion>) Lists.newArrayList(confederacionRepository.findAll()));
 		//return new Status(1, "Correct!");
 			
-	}
-	
-	private static <E> Collection<E> makeCollection(Iterator<E> iterator) {
-	    Collection<E> list = new ArrayList<E>();
-	    while(iterator.hasNext())
-	        list.add(iterator.next());
-	    
-	    return list;
 	}
 	
 	

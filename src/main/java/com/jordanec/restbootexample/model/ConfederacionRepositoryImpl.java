@@ -12,12 +12,8 @@ public class ConfederacionRepositoryImpl implements ConfederacionRepositoryCusto
 	@Transactional
 	@Override
 	public boolean update(Object object) {
-		//em.getTransaction().begin();
 		getEm().merge(object);
-		//em.getTransaction().commit();
-		//em.createQuery("UPDATE Confederacion set ");
 		return true;
-		
 	}
 
 	public EntityManager getEm() {
