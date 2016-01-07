@@ -1,10 +1,6 @@
 package com.jordanec.restbootexample.api;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,58 +10,58 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jordanec.restbootexample.model.Confederacion;
-import com.jordanec.restbootexample.model.ConfederacionRepository;
+import com.jordanec.restbootexample.model.Pais;
+import com.jordanec.restbootexample.model.PaisRepository;
 import com.jordanec.restbootexample.model.Status;
 import com.google.common.collect.*;
 
 @RestController
-@RequestMapping("/v1/confederaciones")
-public class ConfederacionController {
+@RequestMapping("/v1/paises")
+public class PaisController {
 
 	@Autowired
-	ConfederacionRepository confederacionRepository;
+	PaisRepository paisRepository;
 
-	static final Logger logger = Logger.getLogger(ConfederacionController.class);
+	static final Logger logger = Logger.getLogger(PaisController.class);
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 			"Content-Type=application/json" })
-	Status createConfederacion(@RequestBody Confederacion confederacion) {
+	Status createPais(@RequestBody Pais pais) {
 		try {
-			confederacionRepository.save(confederacion);
-			return new Status(1, "Confederacion added Successfully !");
+			paisRepository.save(pais);
+			return new Status(1, "Pais added Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.getMessage());
 		}
 	}
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.GET)
-	Confederacion readConfederacion(@PathVariable("id") int id) {
-		return confederacionRepository.findOne(id);
+	Pais readPais(@PathVariable("id") int id) {
+		return paisRepository.findOne(id);
 	}
 	
 	@RequestMapping(value="/nombre={nombre}", method=RequestMethod.GET)
-	Confederacion findByNombre(@PathVariable("nombre") String nombre) {
+	Pais findByNombre(@PathVariable("nombre") String nombre) {
 		
-		return confederacionRepository.findByNombre(nombre);
+		return paisRepository.findByNombre(nombre);
 	}
 	
 	@RequestMapping(value="/{id}/update", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
-	Status updateConfederacion(@RequestBody Confederacion confederacion, @PathVariable int id) {
+	Status updatePais(@RequestBody Pais pais, @PathVariable int id) {
 		try {
-			confederacionRepository.update(confederacion);
-			return new Status(1, "Confederacion updated Successfully !");
+			paisRepository.update(pais);
+			return new Status(1, "Pais updated Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.getMessage());
 		}
 	}
 	
 	@RequestMapping(value="/{id}/delete", method=RequestMethod.DELETE)
-	Status deleteConfederacion(@PathVariable int id) {
+	Status deletePais(@PathVariable int id) {
 		try {
-			confederacionRepository.delete(id);
-			return new Status(1, "Confederacion deleted Successfully !");
+			paisRepository.delete(id);
+			return new Status(1, "Pais deleted Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.getMessage());
 		}
@@ -73,8 +69,9 @@ public class ConfederacionController {
 	
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	Collection<Confederacion> listConfederaciones() {
-		return Lists.newArrayList(confederacionRepository.findAll());
+	Collection<Pais> listPaises() {
+		return Lists.newArrayList(paisRepository.findAll());
 	}
-		
+	
+	
 }

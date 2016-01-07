@@ -23,7 +23,7 @@ public class Patrocinador implements java.io.Serializable {
 	private Integer idPatrocinador;
 	private String nombre;
 	private Set<Equipo> equipos = new HashSet<Equipo>(0);
-	private Set<Jugador> jugadors = new HashSet<Jugador>(0);
+	private Set<Jugador> jugadores = new HashSet<Jugador>(0);
 
 	public Patrocinador() {
 	}
@@ -32,10 +32,10 @@ public class Patrocinador implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	public Patrocinador(String nombre, Set<Equipo> equipos, Set<Jugador> jugadors) {
+	public Patrocinador(String nombre, Set<Equipo> equipos, Set<Jugador> jugadores) {
 		this.nombre = nombre;
 		this.equipos = equipos;
-		this.jugadors = jugadors;
+		this.jugadores = jugadores;
 	}
 
 	@Id
@@ -59,7 +59,7 @@ public class Patrocinador implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "patrocinadors")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "patrocinadores")
 	public Set<Equipo> getEquipos() {
 		return this.equipos;
 	}
@@ -69,12 +69,12 @@ public class Patrocinador implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "patrocinador")
-	public Set<Jugador> getJugadors() {
-		return this.jugadors;
+	public Set<Jugador> getJugadores() {
+		return this.jugadores;
 	}
 
-	public void setJugadors(Set<Jugador> jugadors) {
-		this.jugadors = jugadors;
+	public void setJugadores(Set<Jugador> jugadores) {
+		this.jugadores = jugadores;
 	}
 
 }
