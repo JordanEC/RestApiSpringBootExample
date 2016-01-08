@@ -26,8 +26,8 @@ import com.jordanec.restbootexample.util.EquipoSerializer;
  */
 @Entity
 @Table(name = "Equipo", catalog = "FutbolDB_V2")
-@JsonIgnoreProperties({"patrocinadores", "estadios", "jugadores", "pais"})
-@JsonSerialize(using=EquipoSerializer.class)
+//@JsonIgnoreProperties({/*"patrocinadores", "estadios", "pais",*/ "jugadores"})
+//@JsonSerialize(using=EquipoSerializer.class)
 public class Equipo implements java.io.Serializable {
 
 	private Integer idEquipo;
@@ -151,11 +151,18 @@ public class Equipo implements java.io.Serializable {
 			return false;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return " {\"idEquipo\":" + idEquipo + ",\"pais\":\"" + pais + "\",\"nombre\":\"" + nombre
 				+ "\",\"campeonatos\":" + campeonatos + "}";
-	}
+	}*/
+	/*
+	@Override
+	public String toString() {
+		return " {\"idEquipo\":" + idEquipo + "\",\"nombre\":\"" + nombre + "\",\"campeonatos\":" + 
+		campeonatos + ",\"pais\":\"" + pais + "\"estadios\":" + estadios + "\"patrocinadores\":"+patrocinadores+ 
+		"\"jugadores\":" + jugadores + "}";
+	}*/
 	
 	
 }
