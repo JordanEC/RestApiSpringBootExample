@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.jordanec.restbootexample.model.Confederacion;
-import com.jordanec.restbootexample.model.ConfederacionRepository;
+import com.jordanec.restbootexample.repository.ConfederacionRepository;
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired
 @EnableAutoConfiguration

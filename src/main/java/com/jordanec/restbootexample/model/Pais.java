@@ -26,7 +26,7 @@ import com.google.common.base.Objects;
 @Entity
 @Table(name = "Pais", catalog = "FutbolDB_V2", uniqueConstraints = { @UniqueConstraint(columnNames = "nombre"),
 		@UniqueConstraint(columnNames = "puestoRankingFifa") })
-@JsonIgnoreProperties({"confederacion", "equipos", "jugadores"})
+//@JsonIgnoreProperties({/*"confederacion", */"equipos", "jugadores"})
 //@JsonDeserialize(using=PaisJsonDeserializer.class)
 @JsonSerialize(using=PaisSerializer.class)
 public class Pais implements java.io.Serializable {
@@ -120,7 +120,7 @@ public class Pais implements java.io.Serializable {
 	public void setJugadores(Set<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
-
+	
 	@Override
 	public String toString() {
 		return " {\"idPais\":" + idPais + ",\"nombre\":\"" + nombre

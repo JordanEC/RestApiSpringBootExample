@@ -1,10 +1,10 @@
-package com.jordanec.restbootexample.model;
+package com.jordanec.restbootexample.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-public class EquipoRepositoryImpl implements EquipoRepositoryCustom{
+public class PaisRepositoryImpl implements PaisRepositoryCustom{
 	
 	@PersistenceContext
     private EntityManager em;

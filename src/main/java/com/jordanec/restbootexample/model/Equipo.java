@@ -27,7 +27,7 @@ import com.jordanec.restbootexample.util.EquipoSerializer;
 @Entity
 @Table(name = "Equipo", catalog = "FutbolDB_V2")
 //@JsonIgnoreProperties({/*"patrocinadores", "estadios", "pais",*/ "jugadores"})
-//@JsonSerialize(using=EquipoSerializer.class)
+@JsonSerialize(using=EquipoSerializer.class)
 public class Equipo implements java.io.Serializable {
 
 	private Integer idEquipo;

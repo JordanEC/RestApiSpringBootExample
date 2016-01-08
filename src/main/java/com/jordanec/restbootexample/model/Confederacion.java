@@ -71,7 +71,12 @@ public class Confederacion implements java.io.Serializable {
 	public void setCantidadDePaises(Integer cantidadDePaises) {
 		this.cantidadDePaises = cantidadDePaises;
 	}
-
+	
+	/*@Override
+	public String toString() {
+		return "{\"idConfederacion\":" + idConfederacion + ",\"nombre\":\"" + nombre + "\",\"cantidadDePaises\":"
+				+ cantidadDePaises + "\"paises\":" + paises + "}";
+	}*/
 	@Override
 	public String toString() {
 		return "{\"idConfederacion\":" + idConfederacion + ",\"nombre\":\"" + nombre + "\",\"cantidadDePaises\":"

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jordanec.restbootexample.model.Jugador;
-import com.jordanec.restbootexample.model.JugadorRepository;
-import com.jordanec.restbootexample.model.Status;
+import com.jordanec.restbootexample.repository.JugadorRepository;
+import com.jordanec.restbootexample.util.Status;
 import com.google.common.collect.*;
 
 @RestController
@@ -45,7 +45,7 @@ public class JugadorController {
 		
 		return paisRepository.findByNombre(nombre);
 	}
-	
+		
 	@RequestMapping(value="/{id}/update", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
 	Status updateJugador(@RequestBody Jugador pais, @PathVariable int id) {
@@ -58,7 +58,7 @@ public class JugadorController {
 	}
 	
 	@RequestMapping(value="/{id}/delete", method=RequestMethod.DELETE)
-	Status deleteJugador(@PathVariable int id) {
+	Status deleteJugador(@PathVariable("id") int id) {
 		try {
 			paisRepository.delete(id);
 			return new Status(1, "Jugador deleted Successfully !");
@@ -71,6 +71,11 @@ public class JugadorController {
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	Collection<Jugador> listJugadores() {
 		return Lists.newArrayList(paisRepository.findAll());
+	}
+	
+	@RequestMapping(value="/edadMayorA={edad}", method=RequestMethod.GET)
+	Collection<Jugador> getOlderThan(@PathVariable int edad) {
+		return paisRepository.getOlderThan(edad);
 	}
 	
 	

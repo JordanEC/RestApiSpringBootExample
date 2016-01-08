@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.jordanec.restbootexample.model.Equipo;
+import com.jordanec.restbootexample.model.Estadio;
 import com.jordanec.restbootexample.model.Pais;
 
 public class EquipoSerializer extends JsonSerializer<Equipo> {
@@ -20,20 +21,14 @@ public class EquipoSerializer extends JsonSerializer<Equipo> {
 		gen.writeStringField("nombre", value.getNombre());
 		gen.writeNumberField("campeonatos", value.getCampeonatos());
 		gen.writeStringField("pais", value.getPais().getNombre());
-		try {
-			System.out.println(value.getEstadios().toString());
-			System.out.println(value.getPatrocinadores().toString());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		/*
-		 * gen.writeArrayFieldStart("equipos"); Iterator<Equipo> iterator =
-		 * value.getEquipos().iterator(); Equipo equipo; while
-		 * (iterator.hasNext()) { gen.writeStartObject(); equipo =
-		 * iterator.next(); gen.writeNumberField("idEquipo",
-		 * equipo.getIdEquipo()); gen.writeStringField("nombre",
-		 * equipo.getNombre()); gen.writeEndObject(); } gen.writeEndArray();
-		 */
+		gen.writeFieldName("estadios");
+		gen.writeStartArray();
+		Iterator<Estadio> iterator = value.getEstadios().iterator();
+
+		while (iterator.hasNext())
+			gen.writeObject(iterator.next());
+
+		gen.writeEndArray();
 		gen.writeEndObject();
 
 	}

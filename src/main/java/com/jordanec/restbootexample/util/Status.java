@@ -1,4 +1,4 @@
-package com.jordanec.restbootexample.model;
+package com.jordanec.restbootexample.util;
 
 public class Status {
 
