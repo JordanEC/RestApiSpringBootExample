@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jordanec.restbootexample.model.Equipo;
 import com.jordanec.restbootexample.repository.EquipoRepository;
+import com.jordanec.restbootexample.util.Constants;
 import com.jordanec.restbootexample.util.Status;
 import com.google.common.collect.*;
 
 @RestController
-@RequestMapping("/v1/equipos")
+@RequestMapping("/"+Constants.API_VERSION+"/equipos")
 public class EquipoController {
 
 	@Autowired

@@ -1,10 +1,6 @@
 package com.jordanec.restbootexample.api;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,11 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jordanec.restbootexample.model.Confederacion;
 import com.jordanec.restbootexample.repository.ConfederacionRepository;
+import com.jordanec.restbootexample.util.Constants;
 import com.jordanec.restbootexample.util.Status;
 import com.google.common.collect.*;
 
 @RestController
-@RequestMapping("/v1/confederaciones")
+@RequestMapping("/"+Constants.API_VERSION+"/confederaciones")
 public class ConfederacionController {
 
 	@Autowired
@@ -30,7 +27,7 @@ public class ConfederacionController {
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 			"Content-Type=application/json" })
-	Status createConfederacion(@RequestBody Confederacion confederacion) {
+	 Status createConfederacion(@RequestBody Confederacion confederacion) {
 		try {
 			confederacionRepository.save(confederacion);
 			return new Status(1, "Confederacion added Successfully !");
@@ -72,7 +69,7 @@ public class ConfederacionController {
 	}
 	
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	Collection<Confederacion> listConfederaciones() {
 		return Lists.newArrayList(confederacionRepository.findAll());
 	}

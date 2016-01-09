@@ -18,7 +18,7 @@ import com.jordanec.restbootexample.repository.ConfederacionRepository;
 @EnableAutoConfiguration
 //Tell Spring to automatically create a JPA implementation of our
 //VideoRepository
-@EnableJpaRepositories(basePackages = "com.jordanec.restbootexample.model")//ConfederacionRepository.class
+@EnableJpaRepositories(basePackages = "com.jordanec.restbootexample.repository")//ConfederacionRepository.class
 //Tell Spring that this object represents a Configuration for the
 //application
 //@Configuration

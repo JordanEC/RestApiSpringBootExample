@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jordanec.restbootexample.model.Patrocinador;
 import com.jordanec.restbootexample.repository.PatrocinadorRepository;
+import com.jordanec.restbootexample.util.Constants;
 import com.jordanec.restbootexample.util.Status;
 import com.google.common.collect.*;
 
 @RestController
-@RequestMapping("/v1/patrocinadores")
+@RequestMapping("/"+Constants.API_VERSION+"/patrocinadores")
 public class PatrocinadorController {
 
 	@Autowired

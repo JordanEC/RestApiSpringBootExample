@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jordanec.restbootexample.model.Pais;
 import com.jordanec.restbootexample.repository.PaisRepository;
+import com.jordanec.restbootexample.util.Constants;
 import com.jordanec.restbootexample.util.Status;
 import com.google.common.collect.*;
 
 @RestController
-@RequestMapping("/v1/paises")
+@RequestMapping("/"+Constants.API_VERSION+"/paises")
 public class PaisController {
 
 	@Autowired
