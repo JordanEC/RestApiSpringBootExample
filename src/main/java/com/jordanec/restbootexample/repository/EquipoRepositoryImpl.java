@@ -1,18 +1,22 @@
 package com.jordanec.restbootexample.repository;
 
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-public class EquipoRepositoryImpl implements EquipoRepositoryCustom{
+import com.jordanec.restbootexample.model.Equipo;
+
+public class EquipoRepositoryImpl implements EntityRepositoryCustom<Equipo>{
 	
 	@PersistenceContext
     private EntityManager em;
 	
 	@Transactional
-	@Override
-	public boolean update(Object object) {
-		getEm().merge(object);
+	@Override		// TODO Auto-generated method stub
+	public boolean update(Equipo equipo) {
+		getEm().merge(equipo);
 		return true;
 	}
 
@@ -22,6 +26,11 @@ public class EquipoRepositoryImpl implements EquipoRepositoryCustom{
 
 	public void setEm(EntityManager em) {
 		this.em = em;
+	}
+
+	@Override
+	public Collection<Equipo> getOlderThan(int edad) {
+		return null;
 	}
 
 }

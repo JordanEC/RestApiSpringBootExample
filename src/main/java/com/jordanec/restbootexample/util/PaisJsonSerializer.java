@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.jordanec.restbootexample.model.Equipo;
 import com.jordanec.restbootexample.model.Pais;
 
-public class PaisSerializer extends JsonSerializer<Pais> {
+public class PaisJsonSerializer extends JsonSerializer<Pais> {
 
 	@Override
 	public void serialize(Pais value, JsonGenerator gen, SerializerProvider serializers)
@@ -19,7 +19,8 @@ public class PaisSerializer extends JsonSerializer<Pais> {
         gen.writeNumberField("idPais", value.getIdPais());
         gen.writeStringField("nombre", value.getNombre());
         gen.writeNumberField("puestoRankingFifa", value.getPuestoRankingFifa());
-        gen.writeStringField("confederacion", value.getConfederacion().getNombre());
+        //gen.writeStringField("confederacion", value.getConfederacion().getNombre());
+        gen.writeObjectField("confederacion", value.getConfederacion());
         /*gen.writeArrayFieldStart("equipos");
         Iterator<Equipo> iterator = value.getEquipos().iterator();
         Equipo equipo;

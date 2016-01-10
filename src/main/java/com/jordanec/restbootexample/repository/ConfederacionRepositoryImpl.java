@@ -1,10 +1,12 @@
 package com.jordanec.restbootexample.repository;
 
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-public class ConfederacionRepositoryImpl implements ConfederacionRepositoryCustom{
+public class ConfederacionRepositoryImpl implements EntityRepositoryCustom{
 	
 	@PersistenceContext
     private EntityManager em;
@@ -22,6 +24,11 @@ public class ConfederacionRepositoryImpl implements ConfederacionRepositoryCusto
 
 	public void setEm(EntityManager em) {
 		this.em = em;
+	}
+
+	@Override
+	public Collection getOlderThan(int edad) {
+		return null;
 	}
 
 }

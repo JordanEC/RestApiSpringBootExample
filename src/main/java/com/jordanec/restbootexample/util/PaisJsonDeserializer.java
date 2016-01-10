@@ -21,6 +21,7 @@ public class PaisJsonDeserializer extends JsonDeserializer<Pais>{
 		int idPais = (Integer) ((IntNode) node.get("idPais")).numberValue();
 		String nombre = node.get("nombre").asText();		
 		int puestoRankingFifa = (Integer) ((IntNode) node.get("puestoRankingFifa")).numberValue();
+		
 		Confederacion confederacion = new Confederacion();
 		JsonNode confNode = node.get("confederacion").get(0);
 		int idConfederacion = (Integer) ((IntNode) confNode.get("idConfederacion")).numberValue();

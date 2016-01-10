@@ -11,7 +11,7 @@ import com.jordanec.restbootexample.model.Equipo;
 import com.jordanec.restbootexample.model.Jugador;
 import com.jordanec.restbootexample.model.Pais;
 
-public class JugadorSerializer extends JsonSerializer<Jugador> {
+public class JugadorJsonSerializer extends JsonSerializer<Jugador> {
 
 	@Override
 	public void serialize(Jugador value, JsonGenerator gen, SerializerProvider serializers)

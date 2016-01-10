@@ -12,6 +12,6 @@ import com.jordanec.restbootexample.model.Pais;
 import java.util.Optional;
 
 @Repository
-public interface PaisRepository extends CrudRepository<Pais, Integer>, PaisRepositoryCustom{
+public interface PaisRepository extends CrudRepository<Pais, Integer>, EntityRepositoryCustom<Pais>{
 	public Pais findByNombre(String nombre);
 }

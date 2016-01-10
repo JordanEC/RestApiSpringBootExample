@@ -12,7 +12,7 @@ import com.jordanec.restbootexample.model.Patrocinador;
 import java.util.Optional;
 
 @Repository
-public interface PatrocinadorRepository extends CrudRepository<Patrocinador, Integer>, PatrocinadorRepositoryCustom{
+public interface PatrocinadorRepository extends CrudRepository<Patrocinador, Integer>, EntityRepositoryCustom<Patrocinador>{
 	public Patrocinador findByNombre(String nombre);
 	
 

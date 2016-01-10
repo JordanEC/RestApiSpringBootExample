@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jordanec.restbootexample.model.Confederacion;
+import com.jordanec.restbootexample.model.Status;
 import com.jordanec.restbootexample.repository.ConfederacionRepository;
 import com.jordanec.restbootexample.util.Constants;
-import com.jordanec.restbootexample.util.Status;
 import com.google.common.collect.*;
 
 @RestController

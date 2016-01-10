@@ -12,9 +12,6 @@ import com.jordanec.restbootexample.model.Jugador;
 import java.util.Optional;
 
 @Repository
-public interface JugadorRepository extends CrudRepository<Jugador, Integer>, JugadorRepositoryCustom{
+public interface JugadorRepository extends CrudRepository<Jugador, Integer>, EntityRepositoryCustom<Jugador>{
 	public Jugador findByNombre(String nombre);
-	
-
-	
 }

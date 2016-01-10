@@ -1,18 +1,23 @@
 package com.jordanec.restbootexample.repository;
 
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-public class PatrocinadorRepositoryImpl implements PatrocinadorRepositoryCustom{
+import com.jordanec.restbootexample.model.Jugador;
+import com.jordanec.restbootexample.model.Patrocinador;
+
+public class PatrocinadorRepositoryImpl implements EntityRepositoryCustom<Patrocinador>{
 	
 	@PersistenceContext
     private EntityManager em;
 	
 	@Transactional
 	@Override
-	public boolean update(Object object) {
-		getEm().merge(object);
+	public boolean update(Patrocinador patrocinador) {
+		getEm().merge(patrocinador);
 		return true;
 	}
 
@@ -22,6 +27,11 @@ public class PatrocinadorRepositoryImpl implements PatrocinadorRepositoryCustom{
 
 	public void setEm(EntityManager em) {
 		this.em = em;
+	}
+
+	@Override
+	public Collection<Patrocinador> getOlderThan(int edad) {
+		return null;
 	}
 
 }

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jordanec.restbootexample.model.Jugador;
+import com.jordanec.restbootexample.model.Status;
 import com.jordanec.restbootexample.repository.JugadorRepository;
 import com.jordanec.restbootexample.util.Constants;
-import com.jordanec.restbootexample.util.Status;
 import com.google.common.collect.*;
 
 @RestController
@@ -21,7 +21,7 @@ import com.google.common.collect.*;
 public class JugadorController {
 
 	@Autowired
-	JugadorRepository paisRepository;
+	JugadorRepository jugadorRepository;
 
 	static final Logger logger = Logger.getLogger(JugadorController.class);
 	
@@ -29,7 +29,7 @@ public class JugadorController {
 			"Content-Type=application/json" })
 	Status createJugador(@RequestBody Jugador pais) {
 		try {
-			paisRepository.save(pais);
+			jugadorRepository.save(pais);
 			return new Status(1, "Jugador added Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.getMessage());
@@ -38,20 +38,20 @@ public class JugadorController {
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.GET)
 	Jugador readJugador(@PathVariable("id") int id) {
-		return paisRepository.findOne(id);
+		return jugadorRepository.findOne(id);
 	}
 	
 	@RequestMapping(value="/nombre={nombre}", method=RequestMethod.GET)
 	Jugador findByNombre(@PathVariable("nombre") String nombre) {
 		
-		return paisRepository.findByNombre(nombre);
+		return jugadorRepository.findByNombre(nombre);
 	}
 		
 	@RequestMapping(value="/{id}/update", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
 	Status updateJugador(@RequestBody Jugador pais, @PathVariable int id) {
 		try {
-			paisRepository.update(pais);
+			jugadorRepository.update(pais);
 			return new Status(1, "Jugador updated Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.getMessage());
@@ -61,7 +61,7 @@ public class JugadorController {
 	@RequestMapping(value="/{id}/delete", method=RequestMethod.DELETE)
 	Status deleteJugador(@PathVariable("id") int id) {
 		try {
-			paisRepository.delete(id);
+			jugadorRepository.delete(id);
 			return new Status(1, "Jugador deleted Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.getMessage());
@@ -69,14 +69,14 @@ public class JugadorController {
 	}
 	
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	Collection<Jugador> listJugadores() {
-		return Lists.newArrayList(paisRepository.findAll());
+		return Lists.newArrayList(jugadorRepository.findAll());
 	}
 	
 	@RequestMapping(value="/edadMayorA={edad}", method=RequestMethod.GET)
 	Collection<Jugador> getOlderThan(@PathVariable int edad) {
-		return paisRepository.getOlderThan(edad);
+		return jugadorRepository.getOlderThan(edad);
 	}
 	
 	

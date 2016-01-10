@@ -12,7 +12,7 @@ import com.jordanec.restbootexample.model.Estadio;
 import java.util.Optional;
 
 @Repository
-public interface EstadioRepository extends CrudRepository<Estadio, Integer>, EstadioRepositoryCustom{
+public interface EstadioRepository extends CrudRepository<Estadio, Integer>, EntityRepositoryCustom<Estadio>{
 	public Estadio findByNombre(String nombre);
 	
 

@@ -8,15 +8,15 @@ import javax.transaction.Transactional;
 
 import com.jordanec.restbootexample.model.Jugador;
 
-public class JugadorRepositoryImpl implements JugadorRepositoryCustom{
+public class JugadorRepositoryImpl implements EntityRepositoryCustom<Jugador>{
 	
 	@PersistenceContext
     private EntityManager em;
 	
 	@Transactional
 	@Override
-	public boolean update(Object object) {
-		getEm().merge(object);
+	public boolean update(Jugador jugador) {
+		getEm().merge(jugador);
 		return true;
 	}
 
@@ -28,9 +28,13 @@ public class JugadorRepositoryImpl implements JugadorRepositoryCustom{
 		this.em = em;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Jugador> getOlderThan(int edad) {
-		return (Collection<Jugador>) getEm().createQuery("FROM Jugador where edad > :edad").setParameter("edad", edad).getResultList();
+		return (Collection<Jugador>) getEm()
+				.createQuery("FROM Jugador where edad > :edad")
+				.setParameter("edad", edad)
+				.getResultList();
 		
 	}
 

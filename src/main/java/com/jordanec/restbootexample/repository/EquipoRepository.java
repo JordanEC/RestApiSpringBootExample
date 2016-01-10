@@ -12,7 +12,7 @@ import com.jordanec.restbootexample.model.Equipo;
 import java.util.Optional;
 
 @Repository
-public interface EquipoRepository extends CrudRepository<Equipo, Integer>, EquipoRepositoryCustom{
+public interface EquipoRepository extends CrudRepository<Equipo, Integer>, EntityRepositoryCustom<Equipo>{
 	public Equipo findByNombre(String nombre);
 	
 

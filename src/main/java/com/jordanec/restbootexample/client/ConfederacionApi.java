@@ -3,8 +3,7 @@ package com.jordanec.restbootexample.client;
 import java.util.Collection;
 
 import com.jordanec.restbootexample.model.Confederacion;
-//import com.squareup.okhttp.Call;
-import com.jordanec.restbootexample.util.Status;
+import com.jordanec.restbootexample.model.Status;
 
 import retrofit.Call;
 import retrofit.http.Body;
