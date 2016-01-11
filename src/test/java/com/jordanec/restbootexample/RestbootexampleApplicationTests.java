@@ -63,11 +63,11 @@ public class RestbootexampleApplicationTests {
 	public void contextLoads() {
 
 		testConfederacion();
-		//testPais();
-		//testEquipo();
-		//testEstadio();
-		//testPatrocinador();
-		//testJugador();
+		testPais();
+		testEquipo();
+		testEstadio();
+		testPatrocinador();
+		testJugador();
 		
 		/*
 		 * call.enqueue(new Callback<Collection<Confederacion>>() {
