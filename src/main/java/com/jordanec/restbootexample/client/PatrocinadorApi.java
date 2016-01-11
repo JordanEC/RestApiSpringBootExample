@@ -2,8 +2,7 @@ package com.jordanec.restbootexample.client;
 
 import java.util.Collection;
 
-import com.jordanec.restbootexample.model.Patrocinador;
-import com.jordanec.restbootexample.model.Status;
+import com.jordanec.restbootexample.model.*;
 
 import retrofit.Call;
 import retrofit.http.Body;

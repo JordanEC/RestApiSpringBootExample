@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -33,13 +34,14 @@ import com.jordanec.restbootexample.util.EquipoJsonDeserializer;
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="_idEquipo", scope=Equipo.class)
 @Entity
 @Table(name = "Equipo", catalog = "FutbolDB_V2")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})	
+//@JsonIgnoreProperties({"patrocinadores", "estadios", "jugadores", "pais"})	
 //@JsonSerialize(using=EquipoJsonSerializer.class)
 //@JsonDeserialize(using=EquipoJsonDeserializer.class)
 public class Equipo implements java.io.Serializable {
 	/**
 	 * 
 	 */
+	@JsonIgnore
 	private static final long serialVersionUID = -8766290831934018801L;
 	private Integer idEquipo;
 	//@JsonManagedReference(value="paisEquipo")
@@ -59,6 +61,18 @@ public class Equipo implements java.io.Serializable {
 		this.pais = pais;
 		this.nombre = nombre;
 		this.campeonatos = campeonatos;
+	}
+
+	public Equipo(Integer idEquipo, Pais pais, String nombre, int campeonatos, Set<Patrocinador> patrocinadores,
+			Set<Estadio> estadios, Set<Jugador> jugadores) {
+		super();
+		this.idEquipo = idEquipo;
+		this.pais = pais;
+		this.nombre = nombre;
+		this.campeonatos = campeonatos;
+		this.patrocinadores = patrocinadores;
+		this.estadios = estadios;
+		this.jugadores = jugadores;
 	}
 
 	public Equipo(Pais pais, String nombre, int campeonatos, Set<Patrocinador> patrocinadores, Set<Estadio> estadios,

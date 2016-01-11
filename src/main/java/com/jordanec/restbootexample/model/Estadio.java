@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -23,11 +24,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="_idEstadio", scope=Estadio.class)
 @Entity
 @Table(name = "Estadio", catalog = "FutbolDB_V2")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "equipos"})
 public class Estadio implements java.io.Serializable {
 	/**
 	 * 
 	 */
+	@JsonIgnore
 	private static final long serialVersionUID = -4935744021736402736L;
 	private Integer idEstadio;
 	private String nombre;
@@ -36,6 +38,14 @@ public class Estadio implements java.io.Serializable {
 	private Set<Equipo> equipos = new HashSet<Equipo>(0);
 
 	public Estadio() {}
+
+	public Estadio(Integer idEstadio, String nombre, Integer capacidad, Set<Equipo> equipos) {
+		super();
+		this.idEstadio = idEstadio;
+		this.nombre = nombre;
+		this.capacidad = capacidad;
+		this.equipos = equipos;
+	}
 
 	public Estadio(String nombre, Integer capacidad, Set<Equipo> equipos) {
 		this.nombre = nombre;

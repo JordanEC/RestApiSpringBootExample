@@ -12,19 +12,8 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
 import org.springframework.test.context.web.WebAppConfiguration;
-import com.jordanec.restbootexample.client.ConfederacionApi;
-import com.jordanec.restbootexample.client.EquipoApi;
-import com.jordanec.restbootexample.client.EstadioApi;
-import com.jordanec.restbootexample.client.JugadorApi;
-import com.jordanec.restbootexample.client.PaisApi;
-import com.jordanec.restbootexample.client.PatrocinadorApi;
-import com.jordanec.restbootexample.model.Confederacion;
-import com.jordanec.restbootexample.model.Equipo;
-import com.jordanec.restbootexample.model.Estadio;
-import com.jordanec.restbootexample.model.Jugador;
-import com.jordanec.restbootexample.model.Pais;
-import com.jordanec.restbootexample.model.Patrocinador;
-import com.jordanec.restbootexample.model.Status;
+import com.jordanec.restbootexample.client.*;
+import com.jordanec.restbootexample.model.*;
 
 import retrofit.Call;
 import retrofit.Retrofit;
@@ -110,7 +99,7 @@ public class RestbootexampleApplicationTests {
 	
 	public void testEquipo() {
 		//assertTrue(equipoCreateTest());
-		assertNotNull(equipoReadTest(1));			//idEquipo
+		assertNotNull(equipoReadTest(1));					//idEquipo
 		//assertTrue(paisFindByNameTest());
 		//assertTrue(paisUpdateTest());
 		//assertTrue(equipoListTest());
@@ -143,8 +132,6 @@ public class RestbootexampleApplicationTests {
 		//assertTrue(jugadorListTest());
 		//assertTrue(jugadorDeleteTest());
 	}
-	
-	
 	
 	
 	private boolean equipoCreateTest() {
@@ -266,6 +253,7 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 	
+	
 	private Estadio estadioReadTest(int idEstadio) {
 		Call<Estadio> call = estadioApi.readEstadio(idEstadio);
 		
@@ -284,6 +272,7 @@ public class RestbootexampleApplicationTests {
 			return null;
 		}
 	}
+	
 	
 	private Patrocinador patrocinadorReadTest(int idPatrocinador) {
 		Call<Patrocinador> call = patrocinadorApi.readPatrocinador(idPatrocinador);
@@ -304,17 +293,7 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	private boolean paisDeleteTest() {
 		// TODO Auto-generated method stub
 		return false;
@@ -395,6 +374,7 @@ public class RestbootexampleApplicationTests {
 		
 	}
 
+	
 	private boolean confederacionCreateTest() {
 		Confederacion confederacion = new Confederacion("Antártida");
 		confederacion.setIdConfederacion(7);

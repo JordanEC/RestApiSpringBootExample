@@ -3,7 +3,7 @@ package com.jordanec.restbootexample.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.jordanec.restbootexample.model.Confederacion;
+import com.jordanec.restbootexample.model.*;
 
 @Repository
 public interface ConfederacionRepository extends CrudRepository<Confederacion, Integer>, EntityRepositoryCustom<Confederacion>{

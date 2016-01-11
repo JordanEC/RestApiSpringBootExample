@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jordanec.restbootexample.model.Patrocinador;
-import com.jordanec.restbootexample.model.Status;
-import com.jordanec.restbootexample.repository.PatrocinadorRepository;
+import com.jordanec.restbootexample.model.*;
+import com.jordanec.restbootexample.repository.*;
 import com.jordanec.restbootexample.util.Constants;
 import com.google.common.collect.*;
 

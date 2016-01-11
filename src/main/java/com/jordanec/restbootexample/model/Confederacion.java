@@ -15,6 +15,7 @@ import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -32,6 +33,7 @@ public class Confederacion implements java.io.Serializable {
 	/**
 	 * 
 	 */
+	@JsonIgnore
 	private static final long serialVersionUID = 2854333559368929418L;
 	private Integer idConfederacion;
 	private String nombre;
@@ -40,6 +42,14 @@ public class Confederacion implements java.io.Serializable {
 	private Set<Pais> paises = new HashSet<Pais>(0);
 
 	public Confederacion() {
+	}
+
+	public Confederacion(Integer idConfederacion, String nombre, Integer cantidadDePaises, Set<Pais> paises) {
+		super();
+		this.idConfederacion = idConfederacion;
+		this.nombre = nombre;
+		this.cantidadDePaises = cantidadDePaises;
+		this.paises = paises;
 	}
 
 	public Confederacion(String nombre) {

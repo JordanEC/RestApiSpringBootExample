@@ -17,6 +17,7 @@ import javax.persistence.UniqueConstraint;
 import com.jordanec.restbootexample.util.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -42,6 +43,7 @@ public class Pais implements java.io.Serializable {
 	/**
 	 * 
 	 */
+	@JsonIgnore
 	private static final long serialVersionUID = 5025413079710980593L;
 	private Integer idPais;
 	//@JsonManagedReference(value="confederacionPais")
@@ -61,6 +63,17 @@ public class Pais implements java.io.Serializable {
 		this.puestoRankingFifa = puestoRankingFifa;
 	}
 	
+	public Pais(Integer idPais, Confederacion confederacion, String nombre, int puestoRankingFifa, Set<Equipo> equipos,
+			Set<Jugador> jugadores) {
+		super();
+		this.idPais = idPais;
+		this.confederacion = confederacion;
+		this.nombre = nombre;
+		this.puestoRankingFifa = puestoRankingFifa;
+		this.equipos = equipos;
+		this.jugadores = jugadores;
+	}
+
 	public Pais(int idPais, Confederacion confederacion, String nombre, int puestoRankingFifa) {
 		this.idPais = idPais;
 		this.confederacion = confederacion;
