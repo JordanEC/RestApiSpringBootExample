@@ -69,8 +69,13 @@ public class EstadioController {
 	
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	Collection<Estadio> listEstadioes() {
+	Collection<Estadio> listEstadios() {
 		return Lists.newArrayList(estadioRepository.findAll());
+	}
+	
+	@RequestMapping(value="/{id}/equipos", method= RequestMethod.GET)
+	Collection<Equipo> readEstadioEquipos(@PathVariable("id") int id) {
+		return estadioRepository.findOne(id).getEquipos();
 	}
 	
 	

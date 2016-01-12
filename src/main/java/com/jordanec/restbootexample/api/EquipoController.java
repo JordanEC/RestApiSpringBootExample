@@ -37,7 +37,7 @@ public class EquipoController {
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.GET)
 	Equipo readEquipo(@PathVariable("id") int id) {
-		return equipoRepository.findOne(id);	//equipoRepository.findOne(id).getPatrocinadores().toString()
+		return equipoRepository.findOne(id);
 	}
 	
 	@RequestMapping(value="/nombre={nombre}", method=RequestMethod.GET)
@@ -67,10 +67,29 @@ public class EquipoController {
 		}
 	}
 	
-	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	Collection<Equipo> listEquipos() {
 		return Lists.newArrayList(equipoRepository.findAll());
+	}
+	
+	@RequestMapping(value="/{id}/estadios", method= RequestMethod.GET)
+	Collection<Estadio> readEquipoEstadios(@PathVariable("id") int id) {
+		return equipoRepository.findOne(id).getEstadios();
+	}
+	
+	@RequestMapping(value="/{id}/jugadores", method= RequestMethod.GET)
+	Collection<Jugador> readEquipoJugadores(@PathVariable("id") int id) {
+		return equipoRepository.findOne(id).getJugadores();
+	}
+	
+	@RequestMapping(value="/{id}/pais", method= RequestMethod.GET)
+	Pais readEquipoPais(@PathVariable("id") int id) {
+		return equipoRepository.findOne(id).getPais();
+	}
+	
+	@RequestMapping(value="/{id}/patrocinadores", method= RequestMethod.GET)
+	Collection<Patrocinador> readEquipoPatrocinadores(@PathVariable("id") int id) {
+		return equipoRepository.findOne(id).getPatrocinadores();
 	}
 	
 	

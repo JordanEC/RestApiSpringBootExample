@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import com.jordanec.restbootexample.client.ConfederacionApi;
 import com.jordanec.restbootexample.model.Confederacion;
+import com.jordanec.restbootexample.model.Pais;
 import com.jordanec.restbootexample.model.Status;
 
 import retrofit.Call;
@@ -13,19 +14,20 @@ import retrofit.Retrofit;
 
 public class ConfederacionTest {
 	private ConfederacionApi confederacionApi;
-	private Retrofit retrofit;
 	
 	private static ConfederacionTest confederacionTest;
 	
 	protected ConfederacionTest() {}
 	
-	   public static ConfederacionTest getInstance(Retrofit retrofit, ConfederacionApi confederacionApi) {
+	   public static ConfederacionTest getInstance(ConfederacionApi confederacionApi) {
 	      if(confederacionTest == null) {
 	    	confederacionTest = new ConfederacionTest();
-	    	confederacionTest.setRetrofit(retrofit);
 	    	confederacionTest.setConfederacionApi(confederacionApi);
 	      }
 	      return confederacionTest;
+	   }
+	   public static ConfederacionTest getInstance(){
+		   return confederacionTest;
 	   }
 
 
@@ -165,14 +167,50 @@ public class ConfederacionTest {
 		}
 	}
 
+	
+	public Collection<Pais> confederacionPaisesReadTest(int idConfederacion) {
+		System.out.println("\n\nconfederacionPaisesReadTest...\n\n");
+		Call<Collection<Pais>> call = confederacionApi.readConfederacionPaises(idConfederacion);
+
+		try {
+			retrofit.Response<Collection<Pais>> response = call.execute();
+			if (response.isSuccess()) {
+				Collection<Pais> confederacionPaises = response.body();
+				System.out.println("idConfederacion: "+idConfederacion);
+				
+				Iterator<Pais> iterator = confederacionPaises.iterator();
+				Pais pais;
+				while (iterator.hasNext()) {
+					pais = iterator.next();
+					System.out.println("idPais: "+pais.getIdPais()+" nombre:"+pais.getNombre());
+				}
+				
+				return confederacionPaises;
+			}
+			System.out.println(response.message());
+			return null;
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	
+	
 	public boolean doAllTests() {
 		if(confederacionCreateTest() && confederacionReadTest(1) != null &&
 		   confederacionUpdateTest(7)  && confederacionListTest() &&
-		   confederacionFindByNameTest("Antártida_Updated") &&	confederacionDeleteTest(7))
+		   confederacionFindByNameTest("Antártida_Updated") &&	confederacionDeleteTest(7) &&
+		   confederacionPaisesReadTest(1) != null) {
+			System.out.println("confederacion tests successful! ");
 			return true;
-		else 
+		}
+		else {
+			System.out.println("Error in confederacion tests");
 			return false;
-		
+		}
 	}
 	
 	
@@ -182,16 +220,5 @@ public class ConfederacionTest {
 
 	public void setConfederacionApi(ConfederacionApi confederacionApi) {
 		this.confederacionApi = confederacionApi;
-	}
-
-	public Retrofit getRetrofit() {
-		return retrofit;
-	}
-
-	public void setRetrofit(Retrofit retrofit) {
-		this.retrofit = retrofit;
-	}
-
-	
-	
+	}	
 }

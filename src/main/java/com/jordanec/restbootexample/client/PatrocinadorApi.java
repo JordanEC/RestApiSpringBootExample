@@ -40,4 +40,11 @@ public interface PatrocinadorApi {
 	@GET(MAIN_PATH+"/")
 	Call<Collection<Patrocinador>> listPatrocinadores();
 	
+	@GET(MAIN_PATH+"/{idPatrocinador}/equipos")
+	Call<Collection<Equipo>> readPatrocinadorEquipos(@Path("idPatrocinador") int idPatrocinador);
+	
+	@GET(MAIN_PATH+"/{idPatrocinador}/jugadores")
+	Call<Collection<Patrocinador>> readPatrocinadorJugadores(@Path("idPatrocinador") int idPatrocinador);
+	
+	
 }

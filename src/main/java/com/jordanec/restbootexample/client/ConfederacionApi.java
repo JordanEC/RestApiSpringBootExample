@@ -40,4 +40,7 @@ public interface ConfederacionApi {
 	@GET(MAIN_PATH+"/")
 	Call<Collection<Confederacion>> listConfederaciones();
 	
+	@GET(MAIN_PATH+"/{idConfederacion}/paises")
+	Call<Collection<Pais>> readConfederacionPaises(@Path("idConfederacion") int idConfederacion);
+	
 }

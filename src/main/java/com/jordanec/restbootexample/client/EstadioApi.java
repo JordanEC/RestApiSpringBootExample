@@ -40,4 +40,8 @@ public interface EstadioApi {
 	@GET(MAIN_PATH+"/")
 	Call<Collection<Estadio>> listEstadios();
 	
+	@GET(MAIN_PATH+"/{idEstadio}/equipos")
+	Call<Collection<Equipo>> readEstadioEquipos(@Path("idEstadio") int idEstadio);
+	
+	
 }

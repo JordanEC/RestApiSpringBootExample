@@ -28,6 +28,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class RestbootexampleApplicationTests {
 	ConfederacionApi confederacionApi;
 	ConfederacionTest confederacionTest;
+	PaisTest paisTest;
 	PaisApi paisApi;
 	EquipoApi equipoApi;
 	JugadorApi jugadorApi;
@@ -41,9 +42,11 @@ public class RestbootexampleApplicationTests {
 				.addConverterFactory(JacksonConverterFactory.create()).build();
 		
 		confederacionApi = retrofit.create(ConfederacionApi.class);
-		confederacionTest = ConfederacionTest.getInstance(retrofit, confederacionApi);
+		confederacionTest = ConfederacionTest.getInstance(confederacionApi);
 		
 		paisApi = retrofit.create(PaisApi.class);
+		paisTest = PaisTest.getInstance(paisApi);
+		
 		equipoApi = retrofit.create(EquipoApi.class);
 		jugadorApi = retrofit.create(JugadorApi.class);
 		estadioApi = retrofit.create(EstadioApi.class);
@@ -52,8 +55,8 @@ public class RestbootexampleApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		testConfederacion();
-		// testPais();
+		//testConfederacion();
+		 testPais();
 		// testEquipo();
 		// testEstadio();
 		// testPatrocinador();
@@ -91,8 +94,9 @@ public class RestbootexampleApplicationTests {
 	}
 
 	private void testPais() {
-		// assertTrue(paisCreateTest());
-		assertNotNull(paisReadTest(1)); // idPais
+		assertTrue(paisTest.doAllTests());
+		//assertTrue(paisCreateTest());
+		//assertNotNull(paisReadTest(1)); // idPais
 		// assertTrue(paisFindByNameTest());
 		// assertTrue(paisUpdateTest());
 		// assertTrue(paisListTest());

@@ -40,4 +40,17 @@ public interface EquipoApi {
 	@GET(MAIN_PATH+"/")
 	Call<Collection<Equipo>> listEquipos();
 	
+	@GET(MAIN_PATH+"/{idEquipo}/estadios")
+	Call<Collection<Estadio>> readEquipoEstadios(@Path("idEquipo") int idEquipo);
+	
+	@GET(MAIN_PATH+"/{idEquipo}/jugadores")
+	Call<Collection<Jugador>> readEquipoJugadores(@Path("idEquipo") int idEquipo);
+	
+	@GET(MAIN_PATH+"/{idEquipo}/pais")
+	Call<Pais> readEquipoPais(@Path("idEquipo") int idEquipo);
+	
+	@GET(MAIN_PATH+"/{idEquipo}/confederaciones")
+	Call<Collection<Confederacion>> readEquipoConfederaciones(@Path("idEquipo") int idEquipo);
+	
+	
 }

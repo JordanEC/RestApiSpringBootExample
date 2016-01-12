@@ -73,5 +73,21 @@ public class PaisController {
 		return Lists.newArrayList(paisRepository.findAll());
 	}
 	
+	@RequestMapping(value="/{id}/equipos", method= RequestMethod.GET)
+	Collection<Equipo> readPaisEquipos(@PathVariable("id") int id) {
+		return paisRepository.findOne(id).getEquipos();
+	}
+	
+	@RequestMapping(value="/{id}/jugadores", method= RequestMethod.GET)
+	Collection<Jugador> readPaisJugadores(@PathVariable("id") int id) {
+		return paisRepository.findOne(id).getJugadores();
+	}
+	
+	@RequestMapping(value="/{id}/confederacion", method= RequestMethod.GET)
+	Confederacion readPaisConfederacion(@PathVariable("id") int id) {
+		return paisRepository.findOne(id).getConfederacion();
+	}
+	
+	
 	
 }

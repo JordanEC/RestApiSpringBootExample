@@ -40,4 +40,16 @@ public interface JugadorApi {
 	@GET(MAIN_PATH+"/")
 	Call<Collection<Jugador>> listJugadores();
 	
+	@GET(MAIN_PATH+"/{idJugador}/jugador")
+	Call<Equipo> readJugadorEquipo(@Path("idJugador") int idJugador);
+	
+	@GET(MAIN_PATH+"/{idJugador}/pais")
+	Call<Pais> readJugadorPais(@Path("idJugador") int idJugador);
+	
+	@GET(MAIN_PATH+"/{idJugador}/patrocinador")
+	Call<Patrocinador> readJugadorPatrocinador(@Path("idJugador") int idJugador);
+	
+	
+	
+	
 }

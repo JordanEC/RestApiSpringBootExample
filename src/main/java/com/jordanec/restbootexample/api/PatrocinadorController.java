@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jordanec.restbootexample.model.*;
 import com.jordanec.restbootexample.repository.*;
 import com.jordanec.restbootexample.util.Constants;
+
+import retrofit.Call;
+import retrofit.http.GET;
+import retrofit.http.Path;
+
 import com.google.common.collect.*;
 
 @RestController
@@ -35,9 +40,9 @@ public class PatrocinadorController {
 		}
 	}
 	
-	@RequestMapping(value="/{id}", method= RequestMethod.GET)
-	Patrocinador readPatrocinador(@PathVariable("id") int id) {
-		return patrocinadorRepository.findOne(id);
+	@RequestMapping(value="/{idPatrocinador}", method= RequestMethod.GET)
+	Patrocinador readPatrocinador(@PathVariable("idPatrocinador") int idPatrocinador) {
+		return patrocinadorRepository.findOne(idPatrocinador);
 	}
 	
 	@RequestMapping(value="/nombre={nombre}", method=RequestMethod.GET)
@@ -46,9 +51,9 @@ public class PatrocinadorController {
 		return patrocinadorRepository.findByNombre(nombre);
 	}
 	
-	@RequestMapping(value="/{id}/update", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value="/{idPatrocinador}/update", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
-	Status updatePatrocinador(@RequestBody Patrocinador patrocinador, @PathVariable int id) {
+	Status updatePatrocinador(@RequestBody Patrocinador patrocinador, @PathVariable int idPatrocinador) {
 		try {
 			patrocinadorRepository.update(patrocinador);
 			return new Status(1, "Patrocinador updated Successfully !");
@@ -57,10 +62,10 @@ public class PatrocinadorController {
 		}
 	}
 	
-	@RequestMapping(value="/{id}/delete", method=RequestMethod.DELETE)
-	Status deletePatrocinador(@PathVariable int id) {
+	@RequestMapping(value="/{idPatrocinador}/delete", method=RequestMethod.DELETE)
+	Status deletePatrocinador(@PathVariable int idPatrocinador) {
 		try {
-			patrocinadorRepository.delete(id);
+			patrocinadorRepository.delete(idPatrocinador);
 			return new Status(1, "Patrocinador deleted Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.getMessage());
@@ -73,5 +78,14 @@ public class PatrocinadorController {
 		return Lists.newArrayList(patrocinadorRepository.findAll());
 	}
 	
+	@RequestMapping(value="/{idPatrocinador}/equipos", method= RequestMethod.GET)
+	Collection<Equipo> readPatrocinadorEquipos(@PathVariable("idPatrocinador") int idPatrocinador) {
+		return patrocinadorRepository.findOne(idPatrocinador).getEquipos();
+	}
+	
+	@RequestMapping(value="/{idPatrocinador}/jugadores", method= RequestMethod.GET)
+	Collection<Jugador> readPatrocinadorJugadores(@PathVariable("idPatrocinador") int idPatrocinador) {
+		return patrocinadorRepository.findOne(idPatrocinador).getJugadores();
+	}
 	
 }

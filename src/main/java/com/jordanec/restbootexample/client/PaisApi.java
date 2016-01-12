@@ -40,4 +40,15 @@ public interface PaisApi {
 	@GET(MAIN_PATH+"/")
 	Call<Collection<Pais>> listPaises();
 	
+	@GET(MAIN_PATH+"/{idPais}/equipos")
+	Call<Collection<Equipo>> readPaisEquipos(@Path("idPais") int idPais);
+	
+	@GET(MAIN_PATH+"/{idPais}/jugadores")
+	Call<Collection<Jugador>> readPaisJugadores(@Path("idPais") int idPais);
+	
+	@GET(MAIN_PATH+"/{idPais}/confederacion")
+	Call<Confederacion> readPaisConfederacion(@Path("idPais") int idPais);
+	
+	
+	
 }

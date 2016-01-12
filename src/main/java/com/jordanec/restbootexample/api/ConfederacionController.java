@@ -73,4 +73,10 @@ public class ConfederacionController {
 		return Lists.newArrayList(confederacionRepository.findAll());
 	}
 		
+	@RequestMapping(value="/{id}/paises", method= RequestMethod.GET)
+	Collection<Pais> readConfederacionPaises(@PathVariable("id") int id) {
+		return confederacionRepository.findOne(id).getPaises();
+	}
+	
+	
 }

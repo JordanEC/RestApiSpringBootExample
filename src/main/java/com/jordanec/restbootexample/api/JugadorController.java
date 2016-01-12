@@ -35,9 +35,9 @@ public class JugadorController {
 		}
 	}
 	
-	@RequestMapping(value="/{id}", method= RequestMethod.GET)
-	Jugador readJugador(@PathVariable("id") int id) {
-		return jugadorRepository.findOne(id);
+	@RequestMapping(value="/{idJugador}", method= RequestMethod.GET)
+	Jugador readJugador(@PathVariable("idJugador") int idJugador) {
+		return jugadorRepository.findOne(idJugador);
 	}
 	
 	@RequestMapping(value="/nombre={nombre}", method=RequestMethod.GET)
@@ -46,9 +46,9 @@ public class JugadorController {
 		return jugadorRepository.findByNombre(nombre);
 	}
 		
-	@RequestMapping(value="/{id}/update", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value="/{idJugador}/update", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
-	Status updateJugador(@RequestBody Jugador pais, @PathVariable int id) {
+	Status updateJugador(@RequestBody Jugador pais, @PathVariable int idJugador) {
 		try {
 			jugadorRepository.update(pais);
 			return new Status(1, "Jugador updated Successfully !");
@@ -57,10 +57,10 @@ public class JugadorController {
 		}
 	}
 	
-	@RequestMapping(value="/{id}/delete", method=RequestMethod.DELETE)
-	Status deleteJugador(@PathVariable("id") int id) {
+	@RequestMapping(value="/{idJugador}/delete", method=RequestMethod.DELETE)
+	Status deleteJugador(@PathVariable("idJugador") int idJugador) {
 		try {
-			jugadorRepository.delete(id);
+			jugadorRepository.delete(idJugador);
 			return new Status(1, "Jugador deleted Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.getMessage());
@@ -77,6 +77,22 @@ public class JugadorController {
 	Collection<Jugador> getOlderThan(@PathVariable int edad) {
 		return jugadorRepository.getOlderThan(edad);
 	}
+	
+	@RequestMapping(value="/{idJugador}/equipo", method= RequestMethod.GET)
+	Equipo readJugadorEquipo(@PathVariable("idJugador") int idJugador) {
+		return jugadorRepository.findOne(idJugador).getEquipo();
+	}
+	
+	@RequestMapping(value="/{idJugador}/pais", method= RequestMethod.GET)
+	Pais readJugadorPais(@PathVariable("idJugador") int idJugador) {
+		return jugadorRepository.findOne(idJugador).getPais();
+	}
+	
+	@RequestMapping(value="/{idJugador}/patrocinador", method= RequestMethod.GET)
+	Patrocinador readJugadorPatrocinador(@PathVariable("idJugador") int idJugador) {
+		return jugadorRepository.findOne(idJugador).getPatrocinador();
+	}
+	
 	
 	
 }
