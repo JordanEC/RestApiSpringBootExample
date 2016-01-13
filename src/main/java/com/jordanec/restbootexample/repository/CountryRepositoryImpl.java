@@ -35,6 +35,7 @@ public class CountryRepositoryImpl implements EntityRepositoryCustom<Country>{
 
 	@Override
 	public Collection<Country> getOlderThan(int age) {
+		System.out.println("Not supported");
 		return null;
 	}
 

@@ -22,8 +22,8 @@ public interface SponsorApi {
 	@GET(MAIN_PATH+"{idSponsor}")
 	Call<Sponsor> readSponsor(@Path("idSponsor") int idSponsor);
 	
-	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={name}")
-	Call<Sponsor> findByName(@Path("name") String name);
+	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={"+Constants.NAME_VARIABLE+"}")
+	Call<Sponsor> findByName(@Path(Constants.NAME_VARIABLE) String name);
 	
 	@PUT(MAIN_PATH+"{idSponsor}/"+Constants.UPDATE_FUNCTION)
 	Call<Status> updateSponsor(@Body Sponsor sponsor, @Path("idSponsor") int idSponsor);

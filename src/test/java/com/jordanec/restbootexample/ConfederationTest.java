@@ -3,18 +3,14 @@ package com.jordanec.restbootexample;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
-
 import com.jordanec.restbootexample.client.ConfederationApi;
 import com.jordanec.restbootexample.model.Confederation;
 import com.jordanec.restbootexample.model.Country;
 import com.jordanec.restbootexample.model.Status;
-
 import retrofit.Call;
-import retrofit.Retrofit;
 
 public class ConfederationTest {
 	private ConfederationApi confederationApi;
-	
 	private static ConfederationTest confederationTest;
 	
 	protected ConfederationTest() {}
@@ -31,7 +27,7 @@ public class ConfederationTest {
 	   }
 
 	public Confederation confederationReadTest(int idConfederation) {
-		//System.out.println("\n\nconfederationReadTest...\n\n");
+		System.out.println("\nconfederationReadTest... idConfederation = "+idConfederation+"\n\n");
 		Call<Confederation> call = confederationApi.readConfederation(idConfederation);
 
 		try {
@@ -51,9 +47,9 @@ public class ConfederationTest {
 		}
 	}
 
-	private boolean confederationCreateTest() {
-		Confederation confederation = new Confederation("Antártida_Created");
-		System.out.println("\n\nconfederationCreateTest...\n\n");
+	private boolean confederationCreateTest(String name) {
+		Confederation confederation = new Confederation(name);
+		System.out.println("\nconfederationCreateTest... name = "+name+"\n");
 		Call<Status> call = confederationApi.createConfederation(confederation);
 
 		try {
@@ -61,10 +57,10 @@ public class ConfederationTest {
 			if (response.isSuccess()) {
 				Status status = response.body();
 				System.out.println(
-						"status.getCode()=" + status.getCode() + "\nstatus.getMessage()=" + status.getMessage());
+						"status.getCode() = " + status.getCode() + "\nstatus.getMessage() = " + status.getMessage());
 				return true;
 			}
-			System.out.println("response.message()=" + response.message());
+			System.out.println("response.message() = " + response.message());
 			return false;
 
 		} catch (IOException e) {
@@ -76,7 +72,7 @@ public class ConfederationTest {
 	private boolean confederationUpdateTest(int idConfederation) {
 		System.out.println("\n\nconfederationUpdateTest...\n\n");
 		Confederation confederation = confederationReadTest(idConfederation);
-		confederation.setName("Antártida_Updated");
+		confederation.setName(confederation.getName()+"_Updated");
 		
 		Call<Status> call = confederationApi.updateConfederation(confederation, idConfederation);
 
@@ -99,14 +95,14 @@ public class ConfederationTest {
 
 	private boolean confederationDeleteTest(int idConfederation) {
 		System.out.println("\n\nconfederationDeleteTest...\n\n");
-		Call<Status> call = confederationApi.deleteConfederation(7);
+		Call<Status> call = confederationApi.deleteConfederation(idConfederation);
 
 		try {
 			retrofit.Response<Status> response = call.execute();
 			if (response.isSuccess()) {
 				Status status = response.body();
 				System.out.println(
-						"status.getCode()=" + status.getCode() + "\nstatus.getMessage()=" + status.getMessage());
+						"status.getCode() = " + status.getCode() + "\nstatus.getMessage() = " + status.getMessage());
 				return true;
 			}
 			System.out.println(response.message());
@@ -199,24 +195,20 @@ public class ConfederationTest {
 	
 	
 	public boolean doAllTests() {
-		if(/*confederationCreateTest() && */confederationReadTest(56) != null &&	//id1
-		   /*confederationUpdateTest(7)  && confederationListTest() &&*/
-		   confederationFindByNameTest("Antártida_Updated___")/* &&	confederationDeleteTest(7) &&
-		   confederationCountriesReadTest(1) != null*/) {
-			System.out.println("confederation tests successful! ");
+		if(confederationCreateTest("OFC") && confederationReadTest(6) != null &&	//id1
+		   confederationUpdateTest(6)  && confederationListTest() &&
+		   confederationFindByNameTest("OFC_Updated") && confederationDeleteTest(6) &&
+		   confederationCountriesReadTest(1) != null) {
+			System.out.println("Confederation's test successful! ");
 			return true;
 		}
 		else {
-			System.out.println("Error in confederation tests");
+			System.out.println("Error during Confederation's test");
 			return false;
 		}
 	}
 	
 	
-	public ConfederationApi getConfederationApi() {
-		return confederationApi;
-	}
-
 	public void setConfederationApi(ConfederationApi confederationApi) {
 		this.confederationApi = confederationApi;
 	}	

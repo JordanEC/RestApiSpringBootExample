@@ -22,8 +22,8 @@ public interface ConfederationApi {
 	@GET(MAIN_PATH+"{idConfederation}")
 	Call<Confederation> readConfederation(@Path("idConfederation") int idConfederation);
 	
-	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={name}")
-	Call<Confederation> findByName(@Path("name") String name);
+	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={"+Constants.NAME_VARIABLE+"}")
+	Call<Confederation> findByName(@Path(Constants.NAME_VARIABLE) String name);
 	
 	@PUT(MAIN_PATH+"{idConfederation}/"+Constants.UPDATE_FUNCTION)
 	Call<Status> updateConfederation(@Body Confederation confederation, @Path("idConfederation") int idConfederation);

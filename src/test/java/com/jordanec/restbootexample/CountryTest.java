@@ -3,7 +3,6 @@ package com.jordanec.restbootexample;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
-
 import com.jordanec.restbootexample.client.CountryApi;
 import com.jordanec.restbootexample.model.Confederation;
 import com.jordanec.restbootexample.model.Team;
@@ -12,11 +11,9 @@ import com.jordanec.restbootexample.model.Country;
 import com.jordanec.restbootexample.model.Status;
 
 import retrofit.Call;
-import retrofit.Retrofit;
 
 public class CountryTest {
 	private CountryApi countryApi;
-
 	private static CountryTest countryTest;
 
 	protected CountryTest() {
@@ -50,10 +47,10 @@ public class CountryTest {
 		}
 	}
 
-	private boolean countryCreateTest(int idConfederation) {
+	private boolean countryCreateTest(String name, int positionRankingFifa, int idConfederation) {
 		System.out.println("\n\ncountryCreateTest...\n\n");
 		Confederation confederation = ConfederationTest.getInstance().confederationReadTest(idConfederation);
-		Country country = new Country(confederation, "Panamá", 76);
+		Country country = new Country(confederation, name, positionRankingFifa);
 
 		Call<Status> call = countryApi.createCountry(country);
 
@@ -243,8 +240,8 @@ public class CountryTest {
 	}
 
 	public boolean doAllTests() {
-		if (countryCreateTest(1) && countryReadTest(1) != null && countryUpdateTest(18) && countryListTest()
-				&& countryFindByNameTest("Panamá_Updated") && countryDeleteTest(18) && countryTeamsReadTest(1) != null
+		if (countryCreateTest("New Zealand",151, 5) && countryReadTest(1) != null && countryUpdateTest(48) && countryListTest()
+				&& countryFindByNameTest("New Zealand_Updated") && countryDeleteTest(48) && countryTeamsReadTest(1) != null
 				&& countryPlayersReadTest(1) != null && countryConfederationReadTest(1) != null) {
 			System.out.println("country tests successful! ");
 			return true;
@@ -252,10 +249,6 @@ public class CountryTest {
 			System.out.println("Error in country tests");
 			return false;
 		}
-	}
-
-	public CountryApi getCountryApi() {
-		return countryApi;
 	}
 
 	public void setCountryApi(CountryApi countryApi) {

@@ -22,8 +22,8 @@ public interface TeamApi {
 	@GET(MAIN_PATH+"{idTeam}")
 	Call<Team> readTeam(@Path("idTeam") int idTeam);
 	
-	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={name}")
-	Call<Team> findByName(@Path("name") String name);
+	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={"+Constants.NAME_VARIABLE+"}")
+	Call<Team> findByName(@Path(Constants.NAME_VARIABLE) String name);
 	
 	@PUT(MAIN_PATH+"{idTeam}/"+Constants.UPDATE_FUNCTION)
 	Call<Status> updateTeam(@Body Team team, @Path("idTeam") int idTeam);

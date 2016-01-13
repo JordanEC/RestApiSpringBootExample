@@ -22,8 +22,8 @@ public interface StadiumApi {
 	@GET(MAIN_PATH+"{idStadium}")
 	Call<Stadium> readStadium(@Path("idStadium") int idStadium);
 	
-	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={name}")
-	Call<Stadium> findByName(@Path("name") String name);
+	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={"+Constants.NAME_VARIABLE+"}")
+	Call<Stadium> findByName(@Path(Constants.NAME_VARIABLE) String name);
 	
 	@PUT(MAIN_PATH+"{idStadium}/"+Constants.UPDATE_FUNCTION)
 	Call<Status> updateStadium(@Body Stadium stadium, @Path("idStadium") int idStadium);

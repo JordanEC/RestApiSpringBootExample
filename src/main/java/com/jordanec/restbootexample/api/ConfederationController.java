@@ -69,7 +69,7 @@ public class ConfederationController {
 	
 	
 	@RequestMapping(value=Constants.CONFEDERATIONS_PATH, method=RequestMethod.GET)
-	Collection<Confederation> listConfederationes() {
+	Collection<Confederation> listConfederations() {
 		return Lists.newArrayList(confederationRepository.findAll());
 	}
 		

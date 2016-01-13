@@ -22,8 +22,8 @@ public interface CountryApi {
 	@GET(MAIN_PATH+"/{idCountry}")
 	Call<Country> readCountry(@Path("idCountry") int idCountry);
 	
-	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={name}")
-	Call<Country> findByName(@Path("name") String name);
+	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={"+Constants.NAME_VARIABLE+"}")
+	Call<Country> findByName(@Path(Constants.NAME_VARIABLE) String name);
 	
 	@PUT(MAIN_PATH+"{idCountry}/"+Constants.UPDATE_FUNCTION)
 	Call<Status> updateCountry(@Body Country country, @Path("idCountry") int idCountry);

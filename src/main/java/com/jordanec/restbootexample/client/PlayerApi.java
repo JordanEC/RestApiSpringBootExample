@@ -22,8 +22,8 @@ public interface PlayerApi {
 	@GET(MAIN_PATH+"{idPlayer}")
 	Call<Player> readPlayer(@Path("idPlayer") int idPlayer);
 	
-	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={name}")
-	Call<Player> findByName(@Path("name") String name);
+	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={"+Constants.NAME_VARIABLE+"}")
+	Call<Player> findByName(@Path(Constants.NAME_VARIABLE) String name);
 	
 	@PUT(MAIN_PATH+"{idPlayer}/"+Constants.UPDATE_FUNCTION)
 	Call<Status> updatePlayer(@Body Player player, @Path("idPlayer") int idPlayer);
