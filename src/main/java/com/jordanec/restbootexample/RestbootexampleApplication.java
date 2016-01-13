@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 //@EnableAutoConfiguration
-@EnableJpaRepositories(basePackages = "com.jordanec.restbootexample.repository") // ConfederacionRepository.class
+@EnableJpaRepositories(basePackages = "com.jordanec.restbootexample.repository") // ConfederationRepository.class
 @EntityScan(basePackages = "com.jordanec.restbootexample.model")
 @EnableTransactionManagement
 @ComponentScan//basePackages = "com.jordanec.restbootexample")

@@ -15,6 +15,7 @@ import static org.junit.Assert.assertNotNull;
 import org.springframework.test.context.web.WebAppConfiguration;
 import com.jordanec.restbootexample.client.*;
 import com.jordanec.restbootexample.model.*;
+import com.jordanec.restbootexample.util.Constants;
 
 import retrofit.Call;
 import retrofit.Retrofit;
@@ -26,49 +27,49 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringApplicationConfiguration(classes = RestbootexampleApplication.class)
 @WebAppConfiguration
 public class RestbootexampleApplicationTests {
-	ConfederacionApi confederacionApi;
-	ConfederacionTest confederacionTest;
-	PaisTest paisTest;
-	PaisApi paisApi;
-	EquipoApi equipoApi;
-	JugadorApi jugadorApi;
-	EstadioApi estadioApi;
-	PatrocinadorApi patrocinadorApi;
+	ConfederationApi confederationApi;
+	ConfederationTest confederationTest;
+	CountryTest countryTest;
+	CountryApi countryApi;
+	TeamApi teamApi;
+	PlayerApi playerApi;
+	StadiumApi stadiumApi;
+	SponsorApi sponsorApi;
 	Retrofit retrofit;
 
 	@Before
 	public void setUp() {
-		retrofit = new Retrofit.Builder().baseUrl("http://localhost:8080")
+		retrofit = new Retrofit.Builder().baseUrl(Constants.HOSTNAME)
 				.addConverterFactory(JacksonConverterFactory.create()).build();
 		
-		confederacionApi = retrofit.create(ConfederacionApi.class);
-		confederacionTest = ConfederacionTest.getInstance(confederacionApi);
+		confederationApi = retrofit.create(ConfederationApi.class);
+		confederationTest = ConfederationTest.getInstance(confederationApi);
 		
-		paisApi = retrofit.create(PaisApi.class);
-		paisTest = PaisTest.getInstance(paisApi);
+		countryApi = retrofit.create(CountryApi.class);
+		countryTest = CountryTest.getInstance(countryApi);
 		
-		equipoApi = retrofit.create(EquipoApi.class);
-		jugadorApi = retrofit.create(JugadorApi.class);
-		estadioApi = retrofit.create(EstadioApi.class);
-		patrocinadorApi = retrofit.create(PatrocinadorApi.class);
+		teamApi = retrofit.create(TeamApi.class);
+		playerApi = retrofit.create(PlayerApi.class);
+		stadiumApi = retrofit.create(StadiumApi.class);
+		sponsorApi = retrofit.create(SponsorApi.class);
 	}
 
 	@Test
 	public void contextLoads() {
-		//testConfederacion();
-		 testPais();
-		// testEquipo();
-		// testEstadio();
-		// testPatrocinador();
-		// testJugador();
+		testConfederation();
+		//testCountry();
+		// testTeam();
+		// testStadium();
+		// testSponsor();
+		// testPlayer();
 
 		/*
-		 * call.enqueue(new Callback<Collection<Confederacion>>() {
+		 * call.enqueue(new Callback<Collection<Confederation>>() {
 		 * 
 		 * @Override public void
-		 * onResponse(retrofit.Response<Collection<Confederacion>> response,
+		 * onResponse(retrofit.Response<Collection<Confederation>> response,
 		 * Retrofit retrofit) { if(response.isSuccess()) {
-		 * Collection<Confederacion> confe = response.body();
+		 * Collection<Confederation> confe = response.body();
 		 * System.out.println(confe); } else {
 		 * System.out.println("response.code()="+response.code());
 		 * System.out.println("response.errorBody()="+response.errorBody()); }
@@ -83,72 +84,72 @@ public class RestbootexampleApplicationTests {
 
 	}
 
-	private void testConfederacion() {
-		assertTrue(confederacionTest.doAllTests());
-		/*assertTrue(confederacionCreateTest());
-		assertNotNull(confederacionReadTest(1)); // idConfederacion
-		assertTrue(confederacionUpdateTest(7));
-		assertTrue(confederacionFindByNameTest("Antártida_Updated"));
-		assertTrue(confederacionListTest());
-		assertTrue(confederacionDeleteTest(7));*/
+	private void testConfederation() {
+		assertTrue(confederationTest.doAllTests());
+		/*assertTrue(confederationCreateTest());
+		assertNotNull(confederationReadTest(1)); // idConfederation
+		assertTrue(confederationUpdateTest(7));
+		assertTrue(confederationFindByNameTest("Antártida_Updated"));
+		assertTrue(confederationListTest());
+		assertTrue(confederationDeleteTest(7));*/
 	}
 
-	private void testPais() {
-		assertTrue(paisTest.doAllTests());
-		//assertTrue(paisCreateTest());
-		//assertNotNull(paisReadTest(1)); // idPais
-		// assertTrue(paisFindByNameTest());
-		// assertTrue(paisUpdateTest());
-		// assertTrue(paisListTest());
-		// assertTrue(paisDeleteTest());
+	private void testCountry() {
+		assertTrue(countryTest.doAllTests());
+		//assertTrue(countryCreateTest());
+		//assertNotNull(countryReadTest(1)); // idCountry
+		// assertTrue(countryFindByNameTest());
+		// assertTrue(countryUpdateTest());
+		// assertTrue(countryListTest());
+		// assertTrue(countryDeleteTest());
 	}
 
-	public void testEquipo() {
-		// assertTrue(equipoCreateTest());
-		assertNotNull(equipoReadTest(1)); // idEquipo
-		// assertTrue(paisFindByNameTest());
-		// assertTrue(paisUpdateTest());
-		// assertTrue(equipoListTest());
-		// assertTrue(paisDeleteTest());
+	public void testTeam() {
+		// assertTrue(teamCreateTest());
+		assertNotNull(teamReadTest(1)); // idTeam
+		// assertTrue(countryFindByNameTest());
+		// assertTrue(countryUpdateTest());
+		// assertTrue(teamListTest());
+		// assertTrue(countryDeleteTest());
 	}
 
-	public void testEstadio() {
-		// assertTrue(estadioCreateTest());
-		assertNotNull(estadioReadTest(1)); // idEstadio
-		// assertTrue(estadioFindByNameTest());
-		// assertTrue(estadioUpdateTest());
-		// assertTrue(estadioListTest());
-		// assertTrue(estadioDeleteTest());
+	public void testStadium() {
+		// assertTrue(stadiumCreateTest());
+		assertNotNull(stadiumReadTest(1)); // idStadium
+		// assertTrue(stadiumFindByNameTest());
+		// assertTrue(stadiumUpdateTest());
+		// assertTrue(stadiumListTest());
+		// assertTrue(stadiumDeleteTest());
 	}
 
-	public void testPatrocinador() {
-		// assertTrue(patrocinadorCreateTest());
-		assertNotNull(patrocinadorReadTest(1)); // idConfederacion
-		// assertTrue(patrocinadorFindByNameTest());
-		// assertTrue(patrocinadorUpdateTest());
-		// assertTrue(patrocinadorListTest());
-		// assertTrue(patrocinadorDeleteTest());
+	public void testSponsor() {
+		// assertTrue(sponsorCreateTest());
+		assertNotNull(sponsorReadTest(1)); // idConfederation
+		// assertTrue(sponsorFindByNameTest());
+		// assertTrue(sponsorUpdateTest());
+		// assertTrue(sponsorListTest());
+		// assertTrue(sponsorDeleteTest());
 	}
 
-	public void testJugador() {
-		// assertTrue(jugadorCreateTest());
-		assertNotNull(jugadorReadTest(1)); // idJugador
-		// assertTrue(jugadorFindByNameTest());
-		// assertTrue(jugadorUpdateTest());
-		// assertTrue(jugadorListTest());
-		// assertTrue(jugadorDeleteTest());
+	public void testPlayer() {
+		// assertTrue(playerCreateTest());
+		assertNotNull(playerReadTest(1)); // idPlayer
+		// assertTrue(playerFindByNameTest());
+		// assertTrue(playerUpdateTest());
+		// assertTrue(playerListTest());
+		// assertTrue(playerDeleteTest());
 	}
 
-	private Confederacion confederacionReadTest(int idConfederacion) {
-		Call<Confederacion> call = confederacionApi.readConfederacion(idConfederacion);
+	private Confederation confederationReadTest(int idConfederation) {
+		Call<Confederation> call = confederationApi.readConfederation(idConfederation);
 
 		try {
-			retrofit.Response<Confederacion> response = call.execute();
+			retrofit.Response<Confederation> response = call.execute();
 			if (response.isSuccess()) {
-				Confederacion confederacion = response.body();
-				System.out.println("idConfederacion: " + confederacion.getIdConfederacion() + " nombre:"
-						+ confederacion.getNombre());
-				return confederacion;
+				Confederation confederation = response.body();
+				System.out.println("idConfederation: " + confederation.getIdConfederation() + " name:"
+						+ confederation.getName());
+				return confederation;
 			}
 			System.out.println(response.message());
 			return null;
@@ -159,11 +160,11 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private boolean confederacionCreateTest() {
-		Confederacion confederacion = new Confederacion("Antártida_Created"); // id
+	private boolean confederationCreateTest() {
+		Confederation confederation = new Confederation("Antártida_Created"); // id
 																				// 7
 
-		Call<Status> call = confederacionApi.createConfederacion(confederacion);
+		Call<Status> call = confederationApi.createConfederation(confederation);
 
 		try {
 			retrofit.Response<Status> response = call.execute();
@@ -182,31 +183,11 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private boolean confederacionUpdateTest(int idConfederacion) {
-		Confederacion confederacion = confederacionReadTest(idConfederacion);
-		confederacion.setNombre("Antártida_Updated");
+	private boolean confederationUpdateTest(int idConfederation) {
+		Confederation confederation = confederationReadTest(idConfederation);
+		confederation.setName("Antártida_Updated");
 
-		Call<Status> call = confederacionApi.updateConfederacion(confederacion, idConfederacion);
-
-		try {
-			retrofit.Response<Status> response = call.execute();
-			if (response.isSuccess()) {
-				Status status = response.body();
-				System.out.println(
-						"status.getCode()=" + status.getCode() + "\nstatus.getMessage()=" + status.getMessage());
-				return true;
-			}
-			System.out.println(response.message());
-			return false;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	private boolean confederacionDeleteTest(int idConfederacion) {
-		Call<Status> call = confederacionApi.deleteConfederacion(7);
+		Call<Status> call = confederationApi.updateConfederation(confederation, idConfederation);
 
 		try {
 			retrofit.Response<Status> response = call.execute();
@@ -225,19 +206,39 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private boolean confederacionListTest() {
-		Call<Collection<Confederacion>> call = confederacionApi.listConfederaciones();
+	private boolean confederationDeleteTest(int idConfederation) {
+		Call<Status> call = confederationApi.deleteConfederation(7);
 
 		try {
-			retrofit.Response<Collection<Confederacion>> response = call.execute();
+			retrofit.Response<Status> response = call.execute();
 			if (response.isSuccess()) {
-				Collection<Confederacion> confederaciones = response.body();
-				Iterator<Confederacion> iterator = confederaciones.iterator();
-				Confederacion confederacion;
+				Status status = response.body();
+				System.out.println(
+						"status.getCode()=" + status.getCode() + "\nstatus.getMessage()=" + status.getMessage());
+				return true;
+			}
+			System.out.println(response.message());
+			return false;
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	private boolean confederationListTest() {
+		Call<Collection<Confederation>> call = confederationApi.listConfederations();
+
+		try {
+			retrofit.Response<Collection<Confederation>> response = call.execute();
+			if (response.isSuccess()) {
+				Collection<Confederation> confederations = response.body();
+				Iterator<Confederation> iterator = confederations.iterator();
+				Confederation confederation;
 				while (iterator.hasNext()) {
-					confederacion = iterator.next();
-					System.out.println("idConfederacion" + confederacion.getIdConfederacion() + " nombre:"
-							+ confederacion.getNombre());
+					confederation = iterator.next();
+					System.out.println("idConfederation" + confederation.getIdConfederation() + " name:"
+							+ confederation.getName());
 				}
 
 				return true;
@@ -251,15 +252,15 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private boolean confederacionFindByNameTest(String nombre) {
-		Call<Confederacion> call = confederacionApi.findByNombre(nombre);
+	private boolean confederationFindByNameTest(String name) {
+		Call<Confederation> call = confederationApi.findByName(name);
 
 		try {
-			retrofit.Response<Confederacion> response = call.execute();
+			retrofit.Response<Confederation> response = call.execute();
 			if (response.isSuccess()) {
-				Confederacion confederacion = response.body();
-				System.out.println("idConfederacion: " + confederacion.getIdConfederacion() + " nombre:"
-						+ confederacion.getNombre());
+				Confederation confederation = response.body();
+				System.out.println("idConfederation: " + confederation.getIdConfederation() + " name:"
+						+ confederation.getName());
 				return true;
 			}
 			System.out.println(response.message());
@@ -273,15 +274,15 @@ public class RestbootexampleApplicationTests {
 
 	
 	
-	private Pais paisReadTest(int idPais) {
-		Call<Pais> call = paisApi.readPais(idPais);
+	private Country countryReadTest(int idCountry) {
+		Call<Country> call = countryApi.readCountry(idCountry);
 
 		try {
-			retrofit.Response<Pais> response = call.execute();
+			retrofit.Response<Country> response = call.execute();
 			if (response.isSuccess()) {
-				Pais pais = response.body();
-				System.out.println("idPais:" + pais.getIdPais() + " nombre:" + pais.getNombre());
-				return pais;
+				Country country = response.body();
+				System.out.println("idCountry:" + country.getIdCountry() + " name:" + country.getName());
+				return country;
 			}
 			System.out.println(response.message());
 			return null;
@@ -292,22 +293,22 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private boolean paisDeleteTest() {
+	private boolean countryDeleteTest() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	private boolean paisListTest() {
+	private boolean countryListTest() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	private boolean paisUpdateTest() {
-		Pais pais = paisReadTest(1);
-		pais.setNombre(pais.getNombre() + "_Updated");
-		pais.setConfederacion(confederacionReadTest(5));
+	private boolean countryUpdateTest() {
+		Country country = countryReadTest(1);
+		country.setName(country.getName() + "_Updated");
+		country.setConfederation(confederationReadTest(5));
 
-		Call<Status> call = paisApi.updatePais(pais, pais.getIdPais());
+		Call<Status> call = countryApi.updateCountry(country, country.getIdCountry());
 
 		try {
 			retrofit.Response<Status> response = call.execute();
@@ -326,16 +327,16 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private boolean paisFindByNameTest() {
+	private boolean countryFindByNameTest() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	private boolean paisCreateTest() {
-		Confederacion confederacion = confederacionReadTest(1);
-		Pais pais = new Pais(confederacion, "Panamá", 76);
+	private boolean countryCreateTest() {
+		Confederation confederation = confederationReadTest(1);
+		Country country = new Country(confederation, "Panamá", 76);
 
-		Call<Status> call = paisApi.createPais(pais);
+		Call<Status> call = countryApi.createCountry(country);
 
 		try {
 			retrofit.Response<Status> response = call.execute();
@@ -355,25 +356,25 @@ public class RestbootexampleApplicationTests {
 
 	}
 
-	private boolean equipoCreateTest() {
-		Pais pais = paisReadTest(1); // idPais
+	private boolean teamCreateTest() {
+		Country country = countryReadTest(1); // idCountry
 
-		Estadio estadio1 = estadioReadTest(1);
-		Estadio estadio2 = estadioReadTest(2);
-		Set<Estadio> estadios = new HashSet<>();
-		estadios.add(estadio1);
-		estadios.add(estadio2);
+		Stadium stadium1 = stadiumReadTest(1);
+		Stadium stadium2 = stadiumReadTest(2);
+		Set<Stadium> stadiums = new HashSet<>();
+		stadiums.add(stadium1);
+		stadiums.add(stadium2);
 
-		Patrocinador patrocinador = patrocinadorReadTest(1);
-		Set<Patrocinador> patrocinadores = new HashSet<>();
-		patrocinadores.add(patrocinador);
+		Sponsor sponsor = sponsorReadTest(1);
+		Set<Sponsor> sponsors = new HashSet<>();
+		sponsors.add(sponsor);
 
-		Equipo equipo = new Equipo(pais, "Cartago", 3);
+		Team team = new Team(country, "Cartago", 3);
 
-		equipo.setEstadios(estadios);
-		equipo.setPatrocinadores(patrocinadores);
+		team.setStadiums(stadiums);
+		team.setSponsors(sponsors);
 
-		Call<Status> call = equipoApi.createEquipo(equipo);
+		Call<Status> call = teamApi.createTeam(team);
 
 		try {
 			retrofit.Response<Status> response = call.execute();
@@ -394,15 +395,15 @@ public class RestbootexampleApplicationTests {
 	}
 
 	
-	private Equipo equipoReadTest(int idEquipo) {
-		Call<Equipo> call = equipoApi.readEquipo(idEquipo);
+	private Team teamReadTest(int idTeam) {
+		Call<Team> call = teamApi.readTeam(idTeam);
 
 		try {
-			retrofit.Response<Equipo> response = call.execute();
+			retrofit.Response<Team> response = call.execute();
 			if (response.isSuccess()) {
-				Equipo equipo = response.body();
-				System.out.println("idEquipo:" + equipo.getIdEquipo() + " nombre:" + equipo.getNombre());
-				return equipo;
+				Team team = response.body();
+				System.out.println("idTeam:" + team.getIdTeam() + " name:" + team.getName());
+				return team;
 			}
 			System.out.println(response.message());
 			return null;
@@ -413,14 +414,14 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private boolean equipoListTest() {
-		Call<Collection<Equipo>> call = equipoApi.listEquipos();
+	private boolean teamListTest() {
+		Call<Collection<Team>> call = teamApi.listTeams();
 
 		try {
-			retrofit.Response<Collection<Equipo>> response = call.execute();
+			retrofit.Response<Collection<Team>> response = call.execute();
 			if (response.isSuccess()) {
-				Collection<Equipo> equipos = response.body();
-				// System.out.println(equipos);
+				Collection<Team> teams = response.body();
+				// System.out.println(teams);
 				return true;
 			}
 			System.out.println(response.message());
@@ -432,12 +433,12 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private boolean equipoUpdateTest() {
-		Equipo equipo = equipoReadTest(1);
-		equipo.setNombre(equipo.getNombre() + "_Update");
-		equipo.setPais(paisReadTest(10));
+	private boolean teamUpdateTest() {
+		Team team = teamReadTest(1);
+		team.setName(team.getName() + "_Update");
+		team.setCountry(countryReadTest(10));
 
-		Call<Status> call = equipoApi.updateEquipo(equipo, equipo.getIdEquipo());
+		Call<Status> call = teamApi.updateTeam(team, team.getIdTeam());
 
 		try {
 			retrofit.Response<Status> response = call.execute();
@@ -456,14 +457,14 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private Jugador jugadorReadTest(int idJugador) {
-		Call<Jugador> call = jugadorApi.readJugador(idJugador);
+	private Player playerReadTest(int idPlayer) {
+		Call<Player> call = playerApi.readPlayer(idPlayer);
 		try {
-			retrofit.Response<Jugador> response = call.execute();
+			retrofit.Response<Player> response = call.execute();
 			if (response.isSuccess()) {
-				Jugador jugador = response.body();
-				System.out.println("idJugador:" + jugador.getIdJugador() + " nombre:" + jugador.getNombre());
-				return jugador;
+				Player player = response.body();
+				System.out.println("idPlayer:" + player.getIdPlayer() + " name:" + player.getName());
+				return player;
 			}
 			System.out.println(response.message());
 			return null;
@@ -474,15 +475,15 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private Estadio estadioReadTest(int idEstadio) {
-		Call<Estadio> call = estadioApi.readEstadio(idEstadio);
+	private Stadium stadiumReadTest(int idStadium) {
+		Call<Stadium> call = stadiumApi.readStadium(idStadium);
 
 		try {
-			retrofit.Response<Estadio> response = call.execute();
+			retrofit.Response<Stadium> response = call.execute();
 			if (response.isSuccess()) {
-				Estadio estadio = response.body();
-				System.out.println("idEstadio: " + estadio.getIdEstadio() + " nombre:" + estadio.getNombre());
-				return estadio;
+				Stadium stadium = response.body();
+				System.out.println("idStadium: " + stadium.getIdStadium() + " name:" + stadium.getName());
+				return stadium;
 			}
 			System.out.println(response.message());
 			return null;
@@ -493,16 +494,16 @@ public class RestbootexampleApplicationTests {
 		}
 	}
 
-	private Patrocinador patrocinadorReadTest(int idPatrocinador) {
-		Call<Patrocinador> call = patrocinadorApi.readPatrocinador(idPatrocinador);
+	private Sponsor sponsorReadTest(int idSponsor) {
+		Call<Sponsor> call = sponsorApi.readSponsor(idSponsor);
 
 		try {
-			retrofit.Response<Patrocinador> response = call.execute();
+			retrofit.Response<Sponsor> response = call.execute();
 			if (response.isSuccess()) {
-				Patrocinador patrocinador = response.body();
+				Sponsor sponsor = response.body();
 				System.out.println(
-						"idPatrocinador:" + patrocinador.getIdPatrocinador() + " nombre:" + patrocinador.getNombre());
-				return patrocinador;
+						"idSponsor:" + sponsor.getIdSponsor() + " name:" + sponsor.getName());
+				return sponsor;
 			}
 			System.out.println(response.message());
 			return null;
