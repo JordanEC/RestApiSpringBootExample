@@ -23,6 +23,8 @@ public class MyWebMvcConfiguration extends WebMvcConfigurerAdapter {
         super.configureMessageConverters(converters);
 	}
 	
+	
+	
     public MappingJackson2HttpMessageConverter jacksonMessageConverter(){
         MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
         ObjectMapper mapper = new ObjectMapper();
