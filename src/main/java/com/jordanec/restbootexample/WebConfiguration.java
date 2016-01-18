@@ -3,8 +3,12 @@ package com.jordanec.restbootexample;
 import java.util.List;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -16,16 +20,14 @@ import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module.Feature;
 
 @Configuration
 @EnableWebMvc
-public class MyWebMvcConfiguration extends WebMvcConfigurerAdapter {
+public class WebConfiguration extends WebMvcConfigurerAdapter {
 	@Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(jacksonMessageConverter());
         super.configureMessageConverters(converters);
 	}
 	
-	
-	
-    public MappingJackson2HttpMessageConverter jacksonMessageConverter(){
+    private MappingJackson2HttpMessageConverter jacksonMessageConverter(){
         MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
         ObjectMapper mapper = new ObjectMapper();
         Hibernate4Module hibernate4Module = new Hibernate4Module();
@@ -40,4 +42,23 @@ public class MyWebMvcConfiguration extends WebMvcConfigurerAdapter {
         return messageConverter;
     }
 
+}
+
+@Configuration
+class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Override
+	  protected void configure(HttpSecurity http) throws Exception {
+	    http
+	      .csrf().disable()
+	      .authorizeRequests()
+	      	/*
+	        .antMatchers(HttpMethod.POST, "/api/**").authenticated()
+	        .antMatchers(HttpMethod.PUT, "/api/**").authenticated()
+	        .antMatchers(HttpMethod.DELETE, "/api/**").authenticated()
+	        .anyRequest().permitAll()*/
+	      	.anyRequest().authenticated()
+	        .and()
+	      .httpBasic().and()
+	      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	  }
 }
