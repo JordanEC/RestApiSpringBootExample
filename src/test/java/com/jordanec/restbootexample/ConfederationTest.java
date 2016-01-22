@@ -3,7 +3,10 @@ package com.jordanec.restbootexample;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+
 import com.jordanec.restbootexample.client.ConfederationApi;
+import com.jordanec.restbootexample.client.ServiceGenerator;
 import com.jordanec.restbootexample.model.Confederation;
 import com.jordanec.restbootexample.model.Country;
 import com.jordanec.restbootexample.model.Status;
@@ -12,13 +15,15 @@ import retrofit.Call;
 public class ConfederationTest {
 	private ConfederationApi confederationApi;
 	private static ConfederationTest confederationTest;
-	
+	private LinkedHashMap<String, String> tokens;
+
 	protected ConfederationTest() {}
 	
-	   public static ConfederationTest getInstance(ConfederationApi confederationApi) {
+	   public static ConfederationTest getInstance(LinkedHashMap<String, String> tokens) {
 	      if(confederationTest == null) {
 	    	confederationTest = new ConfederationTest();
-	    	confederationTest.setConfederationApi(confederationApi);
+	    	confederationTest.setTokens(tokens);
+	    	confederationTest.createConfederationApi();
 	      }
 	      return confederationTest;
 	   }
@@ -195,10 +200,14 @@ public class ConfederationTest {
 	
 	
 	public boolean doAllTests() {
-		if(confederationCreateTest("OFC") && confederationReadTest(6) != null &&	//id1
-		   confederationUpdateTest(6)  && confederationListTest() &&
-		   confederationFindByNameTest("OFC_Updated") && confederationDeleteTest(6) &&
+		if(confederationCreateTest("OFC") && 
+		   confederationReadTest(6) != null &&	//id=6
+		   confederationUpdateTest(6)  && 
+		   confederationListTest() &&
+		   confederationFindByNameTest("OFC_Updated") && 
+		   confederationDeleteTest(6) &&
 		   confederationCountriesReadTest(1) != null) {
+			
 			System.out.println("Confederation's test successful! ");
 			return true;
 		}
@@ -208,8 +217,16 @@ public class ConfederationTest {
 		}
 	}
 	
-	
-	public void setConfederationApi(ConfederationApi confederationApi) {
-		this.confederationApi = confederationApi;
+	public void createConfederationApi() {
+		confederationTest.confederationApi = ServiceGenerator.createService(ConfederationApi.class, getTokens());
 	}	
+	
+	public LinkedHashMap<String, String> getTokens() {
+		return confederationTest.tokens;
+	}
+
+	public void setTokens(LinkedHashMap<String, String> tokens) {
+		confederationTest.tokens = tokens;
+	}
+	
 }

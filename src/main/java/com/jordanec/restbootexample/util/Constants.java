@@ -20,6 +20,6 @@ public class Constants {
 	public static final String SPONSOR_PATH="sponsor";
 	public static final String STADIUM_PATH="stadium";
 	public static final String NAME_VARIABLE="name";
-	
+	public static final String GET_TOKEN_PATH="/oauth/token";
 	
 }

@@ -24,7 +24,7 @@ public class TeamController {
 
 	static final Logger logger = Logger.getLogger(TeamController.class);
 	
-	@RequestMapping(value = Constants.TEAMS_PATH+"/"+Constants.CREATE_FUNCTION, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value = Constants.TEAMS_PATH, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 			"Content-Type=application/json" })
 	Status createTeam(@RequestBody Team team) {
 		try {
@@ -46,7 +46,7 @@ public class TeamController {
 		return teamRepository.findByName(name);
 	}
 	
-	@RequestMapping(value=Constants.TEAMS_PATH+"/{id}/"+Constants.UPDATE_FUNCTION, method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value=Constants.TEAMS_PATH+"/{id}", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
 	Status updateTeam(@RequestBody Team team, @PathVariable int id) {
 		try {
@@ -57,7 +57,7 @@ public class TeamController {
 		}
 	}
 	
-	@RequestMapping(value=Constants.TEAMS_PATH+"/{id}/"+Constants.DELETE_FUNCTION, method=RequestMethod.DELETE)
+	@RequestMapping(value=Constants.TEAMS_PATH+"/{id}", method=RequestMethod.DELETE)
 	Status deleteTeam(@PathVariable int id) {
 		try {
 			teamRepository.delete(id);

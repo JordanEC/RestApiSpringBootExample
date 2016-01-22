@@ -3,26 +3,29 @@ package com.jordanec.restbootexample;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import com.jordanec.restbootexample.client.CountryApi;
+import com.jordanec.restbootexample.client.ServiceGenerator;
 import com.jordanec.restbootexample.model.Confederation;
 import com.jordanec.restbootexample.model.Team;
 import com.jordanec.restbootexample.model.Player;
 import com.jordanec.restbootexample.model.Country;
 import com.jordanec.restbootexample.model.Status;
-
 import retrofit.Call;
 
 public class CountryTest {
 	private CountryApi countryApi;
 	private static CountryTest countryTest;
+	private LinkedHashMap<String, String> tokens;
 
 	protected CountryTest() {
 	}
 
-	public static CountryTest getInstance(CountryApi countryApi) {
+	public static CountryTest getInstance(LinkedHashMap<String, String> tokens) {
 		if (countryTest == null) {
 			countryTest = new CountryTest();
-			countryTest.setCountryApi(countryApi);
+			countryTest.setTokens(tokens);
+			countryTest.createCountryApi();
 		}
 		return countryTest;
 	}
@@ -240,9 +243,14 @@ public class CountryTest {
 	}
 
 	public boolean doAllTests() {
-		if (countryCreateTest("New Zealand",151, 5) && countryReadTest(1) != null && countryUpdateTest(48) && countryListTest()
-				&& countryFindByNameTest("New Zealand_Updated") && countryDeleteTest(48) && countryTeamsReadTest(1) != null
-				&& countryPlayersReadTest(1) != null && countryConfederationReadTest(1) != null) {
+		if (countryCreateTest("New Zealand", 151, 5) && 
+			countryReadTest(1) != null && countryUpdateTest(48)	&& 
+			countryListTest() && 
+			countryFindByNameTest("New Zealand_Updated") && 
+			countryDeleteTest(48) && 
+			countryTeamsReadTest(1) != null && 
+			countryPlayersReadTest(1) != null && 
+			countryConfederationReadTest(1) != null) {
 			System.out.println("country tests successful! ");
 			return true;
 		} else {
@@ -251,8 +259,15 @@ public class CountryTest {
 		}
 	}
 
-	public void setCountryApi(CountryApi countryApi) {
-		this.countryApi = countryApi;
+	public void createCountryApi() {
+		countryTest.countryApi = ServiceGenerator.createService(CountryApi.class, getTokens());
 	}
 
+	public LinkedHashMap<String, String> getTokens() {
+		return countryTest.tokens;
+	}
+
+	public void setTokens(LinkedHashMap<String, String> tokens) {
+		countryTest.tokens = tokens;
+	}
 }

@@ -24,7 +24,7 @@ public class CountryController {
 
 	static final Logger logger = Logger.getLogger(CountryController.class);
 	
-	@RequestMapping(value =Constants.COUNTRIES_PATH+"/"+Constants.CREATE_FUNCTION, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value =Constants.COUNTRIES_PATH, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 			"Content-Type=application/json" })
 	Status createCountry(@RequestBody Country country) {
 		try {
@@ -45,7 +45,7 @@ public class CountryController {
 		return countryRepository.findByName(name);
 	}
 	
-	@RequestMapping(value=Constants.COUNTRIES_PATH+"/{id}/"+Constants.UPDATE_FUNCTION, method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value=Constants.COUNTRIES_PATH+"/{id}", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
 	Status updateCountry(@RequestBody Country country, @PathVariable int id) {
 		try {
@@ -56,7 +56,7 @@ public class CountryController {
 		}
 	}
 	
-	@RequestMapping(value=Constants.COUNTRIES_PATH+"/{id}/"+Constants.DELETE_FUNCTION, method=RequestMethod.DELETE)
+	@RequestMapping(value=Constants.COUNTRIES_PATH+"/{id}", method=RequestMethod.DELETE)
 	Status deleteCountry(@PathVariable int id) {
 		try {
 			countryRepository.delete(id);

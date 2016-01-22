@@ -1,17 +1,14 @@
 package com.jordanec.restbootexample;
 
 import java.util.List;
-
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -19,46 +16,33 @@ import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module.Feature;
 
 @Configuration
-@EnableWebMvc
-public class WebConfiguration extends WebMvcConfigurerAdapter {
-	@Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(jacksonMessageConverter());
-        super.configureMessageConverters(converters);
+//
+@EnableAuthorizationServer
+@EnableResourceServer
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+//
+public class WebConfiguration {
+	@EnableWebMvc
+	protected static class WebMvcConfiguration extends WebMvcConfigurerAdapter {
+		@Override
+		public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+			converters.add(jacksonMessageConverter());
+			super.configureMessageConverters(converters);
+		}
+
+		private MappingJackson2HttpMessageConverter jacksonMessageConverter() {
+			MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
+			ObjectMapper mapper = new ObjectMapper();
+			Hibernate4Module hibernate4Module = new Hibernate4Module();
+			hibernate4Module.configure(Feature.FORCE_LAZY_LOADING, true);
+			mapper.registerModule(hibernate4Module);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
+			mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
+			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+			messageConverter.setObjectMapper(mapper);
+			return messageConverter;
+		}
 	}
-	
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter(){
-        MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
-        ObjectMapper mapper = new ObjectMapper();
-        Hibernate4Module hibernate4Module = new Hibernate4Module();
-        hibernate4Module.configure(Feature.FORCE_LAZY_LOADING, true);
-        mapper.registerModule(hibernate4Module);
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
-        mapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
-        mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
-        mapper.configure(SerializationFeature.INDENT_OUTPUT,true);
-        messageConverter.setObjectMapper(mapper);
-        return messageConverter;
-    }
-
-}
-
-@Configuration
-class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Override
-	  protected void configure(HttpSecurity http) throws Exception {
-	    http
-	      .csrf().disable()
-	      .authorizeRequests()
-	      	/*
-	        .antMatchers(HttpMethod.POST, "/api/**").authenticated()
-	        .antMatchers(HttpMethod.PUT, "/api/**").authenticated()
-	        .antMatchers(HttpMethod.DELETE, "/api/**").authenticated()
-	        .anyRequest().permitAll()*/
-	      	.anyRequest().authenticated()
-	        .and()
-	      .httpBasic().and()
-	      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-	  }
 }

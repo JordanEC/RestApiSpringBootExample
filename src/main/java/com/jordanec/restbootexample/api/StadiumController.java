@@ -24,7 +24,7 @@ public class StadiumController {
 
 	static final Logger logger = Logger.getLogger(StadiumController.class);
 	
-	@RequestMapping(value =Constants.STADIUMS_PATH+"/"+Constants.CREATE_FUNCTION, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value =Constants.STADIUMS_PATH, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 			"Content-Type=application/json" })
 	Status createStadium(@RequestBody Stadium stadium) {
 		try {
@@ -46,7 +46,7 @@ public class StadiumController {
 		return stadiumRepository.findByName(name);
 	}
 	
-	@RequestMapping(value=Constants.STADIUMS_PATH+"/{id}/"+Constants.UPDATE_FUNCTION, method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value=Constants.STADIUMS_PATH+"/{id}", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
 	Status updateStadium(@RequestBody Stadium stadium, @PathVariable int id) {
 		try {
@@ -57,7 +57,7 @@ public class StadiumController {
 		}
 	}
 	
-	@RequestMapping(value=Constants.STADIUMS_PATH+"/{id}/"+Constants.DELETE_FUNCTION, method=RequestMethod.DELETE)
+	@RequestMapping(value=Constants.STADIUMS_PATH+"/{id}", method=RequestMethod.DELETE)
 	Status deleteStadium(@PathVariable int id) {
 		try {
 			stadiumRepository.delete(id);
