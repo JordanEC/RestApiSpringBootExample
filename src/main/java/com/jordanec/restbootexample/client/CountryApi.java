@@ -14,33 +14,33 @@ import retrofit.http.Path;
 import retrofit.http.DELETE;
 
 public interface CountryApi {
-	public static final String MAIN_PATH = "/"+Constants.API_VERSION+"/"+Constants.COUNTRIES_PATH+"/";
+	public static final String MAIN_PATH = "/"+Constants.API_VERSION+"/"+Constants.COUNTRIES_PATH;
 	
-	@POST(MAIN_PATH+Constants.CREATE_FUNCTION)
+	@POST(MAIN_PATH)
 	Call<Status> createCountry(@Body Country country);
 	
 	@GET(MAIN_PATH+"/{idCountry}")
 	Call<Country> readCountry(@Path("idCountry") int idCountry);
 	
-	@GET(MAIN_PATH+Constants.NAME_VARIABLE+"={"+Constants.NAME_VARIABLE+"}")
+	@GET(MAIN_PATH+"/"+Constants.NAME_VARIABLE+"={"+Constants.NAME_VARIABLE+"}")
 	Call<Country> findByName(@Path(Constants.NAME_VARIABLE) String name);
 	
-	@PUT(MAIN_PATH+"{idCountry}/"+Constants.UPDATE_FUNCTION)
+	@PUT(MAIN_PATH+"/{idCountry}")
 	Call<Status> updateCountry(@Body Country country, @Path("idCountry") int idCountry);
 	
-	@DELETE(MAIN_PATH+"{idCountry}/"+Constants.DELETE_FUNCTION)
+	@DELETE(MAIN_PATH+"/{idCountry}")
 	Call<Status> deleteCountry(@Path("idCountry") int idCountry);
 	
 	@GET(MAIN_PATH)
 	Call<Collection<Country>> listCountries();
 	
-	@GET(MAIN_PATH+"{idCountry}/"+Constants.TEAMS_PATH)
+	@GET(MAIN_PATH+"/{idCountry}/"+Constants.TEAMS_PATH)
 	Call<Collection<Team>> readCountryTeams(@Path("idCountry") int idCountry);
 	
-	@GET(MAIN_PATH+"{idCountry}/"+Constants.PLAYERS_PATH)
+	@GET(MAIN_PATH+"/{idCountry}/"+Constants.PLAYERS_PATH)
 	Call<Collection<Player>> readCountryPlayers(@Path("idCountry") int idCountry);
 	
-	@GET(MAIN_PATH+"{idCountry}/"+Constants.CONFEDERATION_PATH)
+	@GET(MAIN_PATH+"/{idCountry}/"+Constants.CONFEDERATION_PATH)
 	Call<Confederation> readCountryConfederation(@Path("idCountry") int idCountry);
 	
 	

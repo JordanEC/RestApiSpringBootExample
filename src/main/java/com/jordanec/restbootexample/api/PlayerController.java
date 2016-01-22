@@ -24,7 +24,7 @@ public class PlayerController {
 
 	static final Logger logger = Logger.getLogger(PlayerController.class);
 	
-	@RequestMapping(value =Constants.PLAYERS_PATH+"/"+Constants.READ_FUNCTION, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value =Constants.PLAYERS_PATH, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 			"Content-Type=application/json" })
 	Status createPlayer(@RequestBody Player country) {
 		try {
@@ -46,7 +46,7 @@ public class PlayerController {
 		return playerRepository.findByName(name);
 	}
 		
-	@RequestMapping(value=Constants.PLAYERS_PATH+"/{idPlayer}/"+Constants.UPDATE_FUNCTION, method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value=Constants.PLAYERS_PATH+"/{idPlayer}", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
 	Status updatePlayer(@RequestBody Player country, @PathVariable int idPlayer) {
 		try {
@@ -57,7 +57,7 @@ public class PlayerController {
 		}
 	}
 	
-	@RequestMapping(value=Constants.PLAYERS_PATH+"/{idPlayer}/"+Constants.DELETE_FUNCTION, method=RequestMethod.DELETE)
+	@RequestMapping(value=Constants.PLAYERS_PATH+"/{idPlayer}", method=RequestMethod.DELETE)
 	Status deletePlayer(@PathVariable("idPlayer") int idPlayer) {
 		try {
 			playerRepository.delete(idPlayer);

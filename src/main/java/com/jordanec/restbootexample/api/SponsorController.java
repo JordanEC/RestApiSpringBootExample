@@ -29,7 +29,7 @@ public class SponsorController {
 
 	static final Logger logger = Logger.getLogger(SponsorController.class);
 	
-	@RequestMapping(value =Constants.SPONSORS_PATH+"/"+Constants.CREATE_FUNCTION, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value =Constants.SPONSORS_PATH, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 			"Content-Type=application/json" })
 	Status createSponsor(@RequestBody Sponsor sponsor) {
 		try {
@@ -51,7 +51,7 @@ public class SponsorController {
 		return sponsorRepository.findByName(name);
 	}
 	
-	@RequestMapping(value=Constants.SPONSORS_PATH+"/{idSponsor}/"+Constants.UPDATE_FUNCTION, method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
+	@RequestMapping(value=Constants.SPONSORS_PATH+"/{idSponsor}", method=RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {
 	"Content-Type=application/json" })
 	Status updateSponsor(@RequestBody Sponsor sponsor, @PathVariable int idSponsor) {
 		try {
@@ -62,7 +62,7 @@ public class SponsorController {
 		}
 	}
 	
-	@RequestMapping(value=Constants.SPONSORS_PATH+"/{idSponsor}/"+Constants.DELETE_FUNCTION, method=RequestMethod.DELETE)
+	@RequestMapping(value=Constants.SPONSORS_PATH+"/{idSponsor}", method=RequestMethod.DELETE)
 	Status deleteSponsor(@PathVariable int idSponsor) {
 		try {
 			sponsorRepository.delete(idSponsor);
